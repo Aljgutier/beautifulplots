@@ -1,0 +1,1 @@
+from beautifulplots import beautifulplots
