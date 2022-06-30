@@ -1,6 +1,5 @@
 # Examples
 
-
 ```python
 import beautifulplots as bp
 import matplotlib.pyplot as plt
@@ -8,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 ```
 
-## Barplot
+## Barplot (hello)
 
 
 ```python
