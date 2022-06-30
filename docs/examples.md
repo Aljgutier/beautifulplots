@@ -7,7 +7,7 @@ import pandas as pd
 import seaborn as sns
 ```
 
-## Barplot (hello)
+## Barplot
 
 
 ```python
