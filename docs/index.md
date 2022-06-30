@@ -1,5 +1,7 @@
 ```{include} ../README.md
 ```
+```{include} beautifulplots.md
+```
 
 ```{toctree}
 :maxdepth: 1
