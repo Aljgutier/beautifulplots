@@ -8,7 +8,7 @@ import pandas as pd
 import seaborn as sns
 ```
 
-# Barplot
+## Barplot
 
 
 ```python
@@ -21,10 +21,10 @@ mpl.rcParams.update(mpl.rcParamsDefault)
 # data 
 print('Data:Product Category Sales by Store')
 barplot_data = { 'category':['groceries','groceries','groceries', 'hardware','hardware','hardware','hobbies','hobbies','hobbies'] ,
-                'sales':[ 90, 60,50, 50,30,20,40,40,20], 'store':['A','B','C','A','B','C','A','B','C'] }
+                'sales':[ 90, 60,50, 50,30,20,40,40,20], 'store':['Store-A','Store-B','Store-C','Store-A','Store-B','Store-C','Store-A','Store-B','Store-C'] }
 
 df = pd.DataFrame(barplot_data)
-# create unit sales by category ... assume some average sale price per category
+# unit sales by category ... assume some average sale price per category
 def unit_sales(row):
     units = 0
     if row['category'] == 'groceries': units = row['sales']/5
@@ -35,31 +35,28 @@ df['units']= df.apply(lambda row: unit_sales(row),axis=1)
 display(df)
 
 
-# Example 1a:  Seaborn default with built automatic fig,ax 
-sns.barplot(x='category',y='sales',ci=None, data=df, palette ='tab20').set_title('1a. Seaborn default parameters, internal-automaic fig, ax')
 
-
-# Example 1b: Seaborn default w external fig,ax 
+# Example 1a: Seaborn default w external defined fig,ax 
 plt.style.use('seaborn')
 fig,ax = plt.subplots(nrows=1,ncols=1,figsize=(12,4))
-sns.barplot(x='category',y='sales', data=df, ci=None, palette ='tab20').set_title('1b. Seaborn (SNS) default, external fig,ax')
+sns.barplot(x='category',y='sales', data=df, ci=None, palette ='tab20').set_title('1a. Seaborn (SNS) default, external fig,ax')
 plt.show()
 
 
-# Example 1c
+# Example 1b
 bp.barplot(df,'category','sales', palette='tab20', 
-                   title='1c. Kale barplot, Product Category Sales All Stores, secondary y-axis vfg', figsize=(12,4),
+                   title='1b. Beautifulplots barplot, Sales All Stores by Product Category, secondary y-axis', figsize=(12,4),
                    bardatalabels=True, bardataformat=".2f", barcurrency=True, ylims = (0.1,220), 
                    y2='units',ylims2=(0,45), color2='black',marker2="o")
 
-# Example 1d
+# Example 1c
 bp.barplot(df,'category','sales',hue='store', palette='tab20', 
-                   title='1d. Kale barplot, Product Category Sales by Store, vertical bars', figsize=(12,4), legend=True,
+                   title='1c. Beautifulplots barplot, Sales by Store by Product Category, vertical', figsize=(12,4), legend=True,
                    bardatalabels=True, bardataformat=".2f", barcurrency=True, ylims = (0.1,100))
 
-# Example 1e
+# Example 1d
 bp.barplot(df,'category','sales',hue='store', palette='tab20', 
-                   title='1e. Kale barplot, Product Category Sales by Store, horizontal bars', figsize=(12,8), 
+                   title='1d. Beautifulplots barplot, Sales by Store by Product Category, horizontal', figsize=(12,8), 
                    bardatalabels=True, bardataformat=".2f", barcurrency=True, bar_orientation='h',
                    xlims = (0.1,100), legend=True, legendloc="lower right")
 
@@ -103,63 +100,63 @@ bp.barplot(df,'category','sales',hue='store', palette='tab20',
       <th>0</th>
       <td>groceries</td>
       <td>90</td>
-      <td>A</td>
+      <td>Store-A</td>
       <td>18.0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>groceries</td>
       <td>60</td>
-      <td>B</td>
+      <td>Store-B</td>
       <td>12.0</td>
     </tr>
     <tr>
       <th>2</th>
       <td>groceries</td>
       <td>50</td>
-      <td>C</td>
+      <td>Store-C</td>
       <td>10.0</td>
     </tr>
     <tr>
       <th>3</th>
       <td>hardware</td>
       <td>50</td>
-      <td>A</td>
+      <td>Store-A</td>
       <td>5.0</td>
     </tr>
     <tr>
       <th>4</th>
       <td>hardware</td>
       <td>30</td>
-      <td>B</td>
+      <td>Store-B</td>
       <td>3.0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>hardware</td>
       <td>20</td>
-      <td>C</td>
+      <td>Store-C</td>
       <td>2.0</td>
     </tr>
     <tr>
       <th>6</th>
       <td>hobbies</td>
       <td>40</td>
-      <td>A</td>
+      <td>Store-A</td>
       <td>2.0</td>
     </tr>
     <tr>
       <th>7</th>
       <td>hobbies</td>
       <td>40</td>
-      <td>B</td>
+      <td>Store-B</td>
       <td>2.0</td>
     </tr>
     <tr>
       <th>8</th>
       <td>hobbies</td>
       <td>20</td>
-      <td>C</td>
+      <td>Store-C</td>
       <td>1.0</td>
     </tr>
   </tbody>
@@ -191,13 +188,7 @@ bp.barplot(df,'category','sales',hue='store', palette='tab20',
     
 
 
-
-    
-![png](output_3_6.png)
-    
-
-
-# Lineplot, Stock Market S&P 500
+## Lineplot, Stock Market S&P 500
 
 
 ```python
@@ -212,7 +203,7 @@ sp500_file =  './data/GSPC_1950-1-3_to_2022-6-8.csv'
 df_sp500 = pd.read_csv(sp500_file,index_col=0,parse_dates=True)
 display(df_sp500.head())
 
-# Pandas Plot ... use plot_options for improving the graph 
+# Pandas Plot ... use beutifulplots plot_defualts and set_axisparams for improving the graph 
 print('Pandas lineplot')
 plt.style.use('seaborn')
 fig,ax = plt.subplots(nrows=1,ncols=1,figsize=(12,4))
@@ -229,7 +220,7 @@ display(df)
 # sns with external ax
 plt.style.use('seaborn')
 fig,ax = plt.subplots(nrows=1,ncols=1,figsize=(12,4))
-g=sns.lineplot(data=df, x="Date", y='Close', label='Close', ax=ax, hue=None).set(title='SNS lineplot')
+g=sns.lineplot(data=df, x="Date", y='Close', label='Close', ax=ax, hue=None).set(title='Seaborn (SNS) lineplot')
 plt.show()
 
 
@@ -237,7 +228,7 @@ plt.show()
 bp.lineplot(df,x='Date' , y=['Close','Open'], y2='Volume', 
              ylims=(0,4000), ylims2=(0,10*1e9), legend_loc2 = "lower left", color2='red',
              figsize=[12,4],yaxis_currency=True, legend=True,
-             ytick_format=".0f", title="S&P 500, Kale lineplot")
+             ytick_format=".0f", title="Beautifulplots lineplot w secondary Y-axis, S&P 500")
 
 
 ```
@@ -495,7 +486,9 @@ bp.lineplot(df,x='Date' , y=['Close','Open'], y2='Volume',
     
 
 
-# help plot_defaults
+# help - plot_defaults, barplot, lineplot
+
+## help plot_defaults
 
 
 ```python
@@ -619,7 +612,7 @@ help(bp.plot_defaults)
     
 
 
-# help barplot
+## help barplot
 
 
 ```python
@@ -662,7 +655,7 @@ help(bp.barplot)
     
 
 
-# help lineplot
+## help lineplot
 
 
 ```python
