@@ -1,13 +1,13 @@
 ```{include} ../README.md
 ```
+```{include} ../examples.md
+```
 
 ```{toctree}
 :maxdepth: 1
 :hidden:
-
-example.ipynb
+Kale.md
+examples.md
 changelog.md
-contributing.md
-conduct.md
 autoapi/index
 ```
