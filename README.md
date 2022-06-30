@@ -1,6 +1,6 @@
 # beautifulplots
 
-Python plotting library for ebeautiful yet easy and sophisticated matplotlib based plots. WoCompatible with Pandas and Seaborn plots.
+Python plotting library for beautiful easy and sophisticated matplotlib based plots. Compatible with Pandas and Seaborn plots.
 
 ## Installation
 
@@ -10,11 +10,8 @@ $ pip install beautifulplots
 
 ## Usage
 
-- TODO
+- See usage examples in examples.ipynb (Jupyter notebook).
 
-## Contributing
-
-Interested in contributing? Check out the contributing guidelines. Please note that this project is released with a Code of Conduct. By contributing to this project, you agree to abide by its terms.
 
 ## License
 
@@ -22,4 +19,4 @@ Interested in contributing? Check out the contributing guidelines. Please note t
 
 ## Credits
 
-`beautifulplots` was created with [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
+`beautifulplots` package setup with  [`cookiecutter`](https://cookiecutter.readthedocs.io/en/latest/) and the `py-pkgs-cookiecutter` [template](https://github.com/py-pkgs/py-pkgs-cookiecutter).
