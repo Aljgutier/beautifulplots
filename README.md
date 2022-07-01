@@ -19,7 +19,7 @@ $ pip install beautifulplots
 
 ## Feature Requests and Issues
 
-Feature requests and issues: please provide feedback and suggestiongs for improvements or issues via github issues. Submit a request at [new issue](https://github.com/Aljgutier/beautifulplots/issues)
+Feature requests and issues: please provide feedback and suggestions for improvements or issues via github issues [new issue](https://github.com/Aljgutier/beautifulplots/issues).
 
 
 ## License
