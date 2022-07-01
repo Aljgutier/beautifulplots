@@ -163,11 +163,46 @@ by Tomas Beuzen & Tiffany Timbers
 
  * Section 3.8.5 **Hosting Documentation Online**
 
+    * https://readthedocs.org/
+    * associate git account with your read the docs account
+    * Create a new packag/project ... add the git repo from your linked account
+    * Build latest
+
  * Section 3.9 **Tagging Package with Version**
+
+   * tag your local branch
+    ```
+    > git tag v0.1.0
+    > git push --tags
+    ```
+  * git online package your release and associate with the tag
+
+  ![Git package release](./git_release_package.png)
 
 * Section 3.10 **Building and Distributing Your Package**
 
-  * Section 3.10.2 **Publishing to testPyPy**
+  * > poetry build
+    * sdist - software distribution
+    * wheel - prebuilt distribution
+
+  * pip install wheel
+    * > cd dist/
+    * >pip install pycounts-0.1.0-py3-none-any.whl
+
+  * pip install sdist
+    * tar xzf beautifulplots-0.1.0.tar.gz
+    * pip install beautifulplots-0.1.0/
+
+  * Section 3.10.2 **Publishing to testPyPi**
+
+    * add testPyPi to Poetry repositories
+    * poetry config repositories.test-pypi https://test.pypi.org/legacy/
+    * poetry publish -r test-pypi # you will need login and password
+    * Install
+      * login to testPyPi and navigate to your project (beautifulplots)
+      * copy the install link at top e.g., pip install -i https:test.pypi.org/simple ...
+      * On your comptuter activate a python virtual environment with Python 3.8 or higher
+      * install with pip (as copied above)
 
   * Section 3.10.2 **Publishing to PyPy**
 
