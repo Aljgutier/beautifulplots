@@ -10,7 +10,12 @@ $ pip install beautifulplots
 
 ## Usage
 
-- See usage examples in examples.ipynb (Jupyter notebook).
+- See usage examples in examples.ipynb (Jupyter notebook) and readthedocs [beatifulplots readthedocs](https://beautifulplots.readthedocs.io/en/latest/index.html).
+
+
+## Feature Requests and Issues
+
+Feature requests and issues: please provide feedback and suggestiongs for improvements or issues via github issues. Submit a request at [new issue](https://github.com/Aljgutier/beautifulplots/issues)
 
 
 ## License
