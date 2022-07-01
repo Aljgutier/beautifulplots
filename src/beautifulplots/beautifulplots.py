@@ -12,19 +12,19 @@ import matplotlib as mpl
 
 
 def plot_defaults():
-    """Dictionary of matplotlib parameters. Each matplotlib parameter coresponds to a key with a corresponding value. 
+    """Dictionary of plot parameters. Each parameter coresponds and corresponding value. 
     See also get_plot_options for extracting plot options from **kwargs. 
 
     **Axis - x, y, and plot area parameters**
     
     Args:
-        df (DataFrame): The input DataFrame containing colums corresponding to bar_plot values (bar_values) and bar_plot columns (bar_columns).
+        df (DataFrame): The input DataFrame containing colums corresponding to bar values and columns.
  
         title (String): corresponds to the axis title. default = ''
             
         titlefontsize: font size of the axis title, default = 18
             
-        legend_loc(String): Matplotlib legend location, for example, upper right , default = best.
+        legend_loc(String): Matplotlib legend location, for example, upper right , default = "best".
         
         legend_loc2 (String): Secondary axis legend location, for example, upper right , default = best.
          
@@ -62,13 +62,13 @@ def plot_defaults():
         
         marker: Matplotlib line markers. default = None (Matplotlib default).
             
-        marker2: Secondary axis, Matplotlib line markers. default = None (Matplotlib default).
+        marker2: Secondary axis, Matplotlib line marker. default = None (Matplotlib default).
             
         yaxis_currency (Boolean): Boolean default = False.
             
         ytick_format (String): String default = None (Matplotlib default).
             
-        alpha (fraction): default = None (not transparent)
+        alpha (fraction): Trasnparancy (opacity), default = None (not transparent)
             
         alpha2 (fraction): Secondary axis, default = 0.5, 50% opacity
         
@@ -88,9 +88,9 @@ def plot_defaults():
             
         estimator2: secondary axis, seaborn barplot summary estimator, default = sum
             
-        color: defualt = None, indicateing Matplolib default (Matplotlib default)
+        color: default = None, indicateing Matplolib default (Matplotlib default)
             
-        color2: secondary axis line, bar or color marker. defualt = None (Matplotlib)
+        color2: secondary axis line, bar or color. defualt = None (Matplotlib default)
             
         palette: colormap, default = None
             
@@ -121,8 +121,8 @@ def plot_defaults():
    
     **Returns**
     
-        Dictionary: {parameter1:value1,parameter2:value2, ... }. 
-        Pairs of matplotlib parameters and also parameters for kale graphs.
+        Dictionary: {parameter1:value1, parameter2:value2, ... }. 
+        Pairs of plat parameters and corresponding values.
     """    
 
     plot_defaults = {
@@ -190,7 +190,7 @@ def set_axisparams(options_dict,ax,g):
         g (graph): matplotlib graph to apply the plot options
 
     Returns:
-        True: returns True if the function completes without errors.
+        None: returns None if the function completes without errors.
     """ 
 
     title=options_dict['title']
@@ -239,13 +239,13 @@ def set_axisparams(options_dict,ax,g):
     return True
 
 def get_kwargs(**kwargs):   
-    """process **kwarg plot options corresponding to the 
-    If a kale.plot_option dictionary key is 
+    """process **kwargs options corresponding to the plot_defaults dictionary (see above)
+    If a beautifulplots plot_option dictionary key is 
     contained in the **kwargs then the plot_defautls[key] value is replaced 
     with that found in **kwargs. 
 
     Returns:
-        Dictionary: {parameter1:value1, parameter2:value2, ...} dictionary with matplotlib defaults 
+        Dictionary: {parameter1:value1, parameter2:value2, ...} dictionary corresponding to plot options 
     """   
        
     plot_options = plot_defaults() # returns a dictionary of defaut matplotlib parameters
@@ -262,7 +262,9 @@ def get_kwargs(**kwargs):
 
  
 def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kwargs):
-    """Bar plot function designed for ease of use and aesthetics, based on the Seaborn barplot function. 
+    """Bar plot function designed for ease of use and aesthetics. 
+    The underlying barplot is ased on the Seaborn with additions, such as secondary axis, data labels,
+    and improved default parameters. Refer to beautifulplots plot_defaults for a complete list of options.
     
     Args:
         df (DataFrame): The input DataFrame containing colums corresponding to bar_plot values ("bar_values") and column names (see examples in documentation)
@@ -401,7 +403,8 @@ def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kw
 
 def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
     """Lineplot function designed for ease of use and aesthetics. Based on the
-    Seaborn lineplot function.
+    Seaborn lineplot function with improvements, such as secondary axis, ease of use, and 
+    improved default parameters. Refer to beautiful plot_defauts for full list of options.
  
     Args:
         df (Dataframe): The input DataFrame containing colums corresponding to x and y     
