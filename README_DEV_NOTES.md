@@ -198,7 +198,7 @@ by Tomas Beuzen & Tiffany Timbers
     * add testPyPi to Poetry repositories
     * poetry config repositories.test-pypi https://test.pypi.org/legacy/
     * poetry publish -r test-pypi # you will need login and password
-    * Install
+    * Install to a local environment
       * login to testPyPi and navigate to your project (beautifulplots)
       * copy the install link at top e.g., pip install -i https:test.pypi.org/simple ...
       * On your comptuter activate a python virtual environment with Python 3.8 or higher
