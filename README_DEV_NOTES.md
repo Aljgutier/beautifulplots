@@ -187,11 +187,11 @@ by Tomas Beuzen & Tiffany Timbers
 
   * pip install wheel
     * > cd dist/
-    * >pip install pycounts-0.1.0-py3-none-any.whl
+    * >pip install beautifulplots-0.1.1-py3-none-any.whl
 
   * pip install sdist
-    * tar xzf beautifulplots-0.1.0.tar.gz
-    * pip install beautifulplots-0.1.0/
+    * tar xzf beautifulplots-0.1.1.tar.gz
+    * pip install beautifulplots-0.1.1/
 
   * Section 3.10.2 **Publishing to testPyPi**
 
