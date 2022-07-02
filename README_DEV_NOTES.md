@@ -172,6 +172,7 @@ by Tomas Beuzen & Tiffany Timbers
 
    * tag your local branch
     ```
+    > update the version in project.toml and commit
     > git tag v0.1.0
     > git push --tags
     ```
