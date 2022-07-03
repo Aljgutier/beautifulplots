@@ -15,8 +15,7 @@ def test_plot_defaults():
     'color': None, 'color2': None, 'palette': None, 'palette2': None, 'hue': None,
     'ci': None, 'ci2': None, 'marker': None, 'marker2': None, 'yaxis_currency': False,
     'ytick_format': None, 'legend_labels': None, 'alpha': None, 'alpha2': 0.5, 
-    'bar_orientation': 'v', 'bardatalabels': False, 'bardataformat': '.2f', 
-    'bardatafontsize': 14, 'estimator': sum, 'estimator2': sum, 'barcurrency': False}
+    'estimator': sum, 'estimator2': sum}
     
     plot_defaults_actual = bp.plot_defaults()
     assert plot_defaults_actual == plot_defaults_expected, "plot_defaults incorrect"
@@ -45,7 +44,29 @@ def test_barplot():
                    title='1e. easy barplot, Product Category Sales by Store, horizontal bars', figsize=(12,8), 
                    bardatalabels=True, bardataformat=".2f", barcurrency=True, bar_orientation='h',
                    xlims = (0.1,100), legend=True, legendloc="lower right", test_mode=True)
+    assert plot_return == None, "barplot error: did not complete normally"
     
+    # do not set bardataformat ... ensure it has useful default
+    plot_return = bp.barplot(df,'category','sales',hue='store', palette='tab20', 
+                   title='1e. easy barplot, Product Category Sales by Store, horizontal bars', figsize=(12,8), 
+                   bardatalabels=True, barcurrency=True, bar_orientation='h',
+                   xlims = (0.1,100), legend=True, legendloc="lower right", test_mode=True)
+    
+    assert plot_return == None, "barplot error: did not complete normally"
+    
+    # do not set bardataformat ... use color
+    plot_return = bp.barplot(df,'category','sales',hue='store', color='blue', 
+                   title='1e. easy barplot, Product Category Sales by Store, horizontal bars', figsize=(12,8), 
+                   bardatalabels=True, barcurrency=True, bar_orientation='h',
+                   xlims = (0.1,100), legend=True, legendloc="lower right", test_mode=True)
+    assert plot_return == None, "barplot error: did not complete normally"
+    
+    # no color or palette, vertical bars
+    # do not set bardataformat ... no color or palette
+    plot_return = bp.barplot(df,'category','sales',hue='store', 
+                   title='1e. easy barplot, Product Category Sales by Store, horizontal bars', figsize=(12,8), 
+                   bardatalabels=True, bar_orientation='v',
+                   xlims = (0.1,100), legend=True, legendloc="lower right", test_mode=True)
     assert plot_return == None, "barplot error: did not complete normally"
     
 def test_lineplot():
@@ -58,6 +79,22 @@ def test_lineplot():
 
     
     plot_return=bp.lineplot(df,x='Date' , y=['Close','Open'], y2='Volume', 
+             ylims=(0,4000), ylims2=(0,10*1e9), legend_loc2 = "lower left", color2='red', alpha2=0.5,
+             figsize=[12,4],yaxis_currency=True, legend=True,
+             ytick_format=".0f", title="S&P 500, easy lineplot", test_mode=True)
+    
+    assert plot_return == None, "lineplot error: did not complete normally"
+    
+    # palette 
+    plot_return=bp.lineplot(df,x='Date' , y=['Close','Open'], y2='Volume', palette='tab20',
+             ylims=(0,4000), ylims2=(0,10*1e9), legend_loc2 = "lower left", color2='red', alpha2=0.5,
+             figsize=[12,4],yaxis_currency=True, legend=True,
+             ytick_format=".0f", title="S&P 500, easy lineplot", test_mode=True)
+    
+    assert plot_return == None, "lineplot error: did not complete normally"
+    
+    
+    plot_return=bp.lineplot(df,x='Date' , y=['Close','Open'], y2='Volume', color='red',
              ylims=(0,4000), ylims2=(0,10*1e9), legend_loc2 = "lower left", color2='red', alpha2=0.5,
              figsize=[12,4],yaxis_currency=True, legend=True,
              ytick_format=".0f", title="S&P 500, easy lineplot", test_mode=True)
