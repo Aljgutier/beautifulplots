@@ -8,7 +8,7 @@ import matplotlib as mpl
 import  beautifulplots.beautifulplots as bp  
 
 
-def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", bardataformat=None,
+def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", bardataformat="1.2f",
             y2=None, ax=None, bardatalabels=False, test_mode=False, bardatafontsize=14,
             **kwargs):
     """Bar plot function designed for ease of use and aesthetics. 
