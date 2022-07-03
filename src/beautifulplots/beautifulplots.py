@@ -67,16 +67,6 @@ def plot_defaults():
             
         alpha2 (fraction): Secondary axis, default = 0.5, 50% opacity
         
-        bar_orientation: "v" (vertical) or "h" (horizontal), default = "v" 
-        
-        bardatalabels (Boolean): Add data labels to bargraph, default = False
-            
-        bardataformat(String): Bardata format number format, default = ":.2f"
-            
-        bardatafontsize: default = 14 
-            
-        barcurrency (Boolean): Bar data labels represent currency (dollar), defuault = False
-            
         legend_labels (list): Overide default legend labels. default = None (do not override)
         
         estimator: seaborn barplot summary estimator, default = sum
@@ -156,7 +146,7 @@ def plot_defaults():
     'ci2': None, # confidence parameter for secondary axis
 
 
-    # Bars, Lines and Scatter
+    # Lines and Scatter
     'marker':None,  # Boolean, list, dictionary
     'marker2':None,  # Boolean, list, or dictionary
     'yaxis_currency':False,
@@ -164,13 +154,9 @@ def plot_defaults():
     'legend_labels':None,
     'alpha': None,
     'alpha2': 0.5,
-    'bar_orientation':'v',
-    'bardatalabels':False,
-    'bardataformat':".2f",
-    'bardatafontsize':14,
     'estimator':sum,
-    'estimator2':sum,
-    'barcurrency':False #dollar, comma, default (None)
+    'estimator2':sum
+ 
 
     }
 
@@ -204,9 +190,6 @@ def set_axisparams(options_dict,ax,g):
     ylims=options_dict['ylims']
     
     
-    bardatalabels=options_dict['bardatalabels']
-    bardataformat=options_dict['bardataformat']
-
     ax.set_xlabel(xlabel,fontsize=xlabelfontsize)
     ax.set_ylabel(ylabel,fontsize=ylabelfontsize)
 
@@ -231,7 +214,7 @@ def set_axisparams(options_dict,ax,g):
         ax.legend( loc=legendloc, prop={'size': legendsize})     
         
 
-    return True
+    return None
 
 def get_kwargs(**kwargs):   
     """process **kwargs options corresponding to the plot_defaults dictionary (see above)

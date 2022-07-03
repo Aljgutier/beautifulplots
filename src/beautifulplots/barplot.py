@@ -8,7 +8,9 @@ import matplotlib as mpl
 import  beautifulplots.beautifulplots as bp 
 
 
-def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kwargs):
+def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", bardataformat=None,
+            y2=None, ax=None, bardatalabels=False, test_mode=False, bardatafontsize=14,
+            **kwargs):
     """Bar plot function designed for ease of use and aesthetics. 
     The underlying barplot is ased on the Seaborn with additions, such as secondary axis, data labels,
     and improved default parameters. Refer to beautifulplots plot_defaults for a complete list of options.
@@ -30,11 +32,11 @@ def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kw
             
         ci: Seaborn confidence interval parameter: float, sd, or None, default = None
             
-        bar_orientation: default = v (vertical), or h (horizontal)
+        barorientation: default = v (vertical), or h (horizontal)
             
-        bar_currency: default = False (bar values do not represent currency). True (bar values represent currency, append $ to the value)
+        barcurrency: default = False (bar values do not represent currency). True (bar values represent currency, append $ to the value)
             
-        bar_datalabels (Boolean): default = False (data labels not included)
+        bardatalabels (Boolean): default = False (data labels not included)
         
         additional options:  see kale.plot_defaults for additional input variables.
             
@@ -52,18 +54,17 @@ def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kw
     alpha = plot_options['alpha']
     alpha2 = plot_options['alpha2']
     hue = plot_options['hue']
-    bar_orientation= plot_options['bar_orientation']
     palette = plot_options['palette']
     palette2 = plot_options['palette2']
     marker2 = plot_options['marker2']
     color = plot_options['color']
     color2 = plot_options['color2']
-    bardataformat =plot_options['bardataformat']
+
 
     # if no hue then only one color
     # if hue == None and color==None : color = [51/235,125/235,183/235] if plot_options['color'] == None else plot_options['color']
 
-    if bar_orientation == 'v': x,y = bar_columns, bar_values
+    if barorientation == 'v': x,y = bar_columns, bar_values
     else: x,y = bar_values, bar_columns
     
 
@@ -74,34 +75,37 @@ def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kw
     else: _ax = ax
         
     g=sns.barplot(x=x, y=y, hue=hue, color = color, palette=palette, data=df, ax = _ax,
-                  orient=bar_orientation, ci=ci, estimator=estimator, alpha=alpha)
+                  orient=barorientation, ci=ci, estimator=estimator, alpha=alpha)
     
     # Bar labels ... iterate with hue
     # Matplotlib
       # https://matplotlib.org/stable/gallery/lines_bars_and_markers/bar_label_demo.html#sphx-glr-gallery-lines-bars-and-markers-bar-label-demo-py
     # Geeks for Geeks
       # https://www.geeksforgeeks.org/how-to-show-values-on-seaborn-barplot/
-    if plot_options['bardatalabels']== True and hue == None:
+    if bardatalabels== True and hue == None:
         f = "%"+bardataformat+""
-        if plot_options["barcurrency"] == True: f = "$"+f # dollar
-        g.bar_label(g.containers[0],  fontsize=plot_options['bardatafontsize'], fmt=f)
+        if barcurrency == True: f = "$"+f # dollar
+        g.bar_label(g.containers[0],  fontsize=bardatafontsize, fmt=f)
 
-    # Geeks for Geeks
+    # Geeks for Geeks bar data labels
       # https://www.geeksforgeeks.org/how-to-show-values-on-seaborn-barplot/
-    if  plot_options['bardatalabels']== True and hue !=None:
+    if  bardatalabels == True and hue !=None:
         f = "%"+bardataformat+""
-        if plot_options["barcurrency"] == True: f = "$"+f # dollar
+        if barcurrency == True: f = "$"+f # dollar
         for i in g.containers:
-            g.bar_label(i,fontsize=plot_options['bardatafontsize'], fmt=f )
+            g.bar_label(i,fontsize=bardatafontsize, fmt=f )
    
     # yaxis tick label format
     # https://matplotlib.org/stable/gallery/pyplots/dollar_ticks.html
-    if plot_options["barcurrency"] == True:
+    # x or y format same as bars ... since this could be v or h graph
+    if barcurrency == True:
         #y_ticks = _ax.get_yticks()
-        if plot_options["bar_orientation"]=='v':
-            _ax.yaxis.set_major_formatter('${x:1.2f}')
-        if plot_options["bar_orientation"]=='h':
-            _ax.xaxis.set_major_formatter('${x:1.2f}')
+        f='{x:'+ bardataformat  +'}'
+        if barcurrency== True: f='${x:'+ bardataformat  +'}'
+        if barorientation=='v':
+            _ax.yaxis.set_major_formatter(f)
+        if barorientation=='h':
+            _ax.xaxis.set_major_formatter(f)
  
    
    # secondary y-axis
@@ -131,6 +135,7 @@ def barplot(df, bar_columns, bar_values, y2=None, ax=None, test_mode=False, **kw
     # set axis params
     bp.set_axisparams(plot_options,_ax,g)  # axis parameters from the plot_options dictionary
     
+    # y2 axis params
     if y2 != None:
         bp.set_axisparams(plot_options,_ax2,g)  # axis parameters
     

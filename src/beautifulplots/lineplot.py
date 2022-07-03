@@ -1,7 +1,5 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
-from matplotlib.colors import Normalize
-from matplotlib.cbook import boxplot_stats
 import matplotlib as mpl
 
 import  beautifulplots.beautifulplots as bp 
@@ -33,7 +31,6 @@ def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
     alpha = plot_options['alpha']
     alpha2 = plot_options['alpha2']
     hue = plot_options['hue']
-    bar_orientation= plot_options['bar_orientation']
     palette = plot_options['palette']
     palette2 = plot_options['palette2']
     marker = plot_options['marker']
@@ -59,7 +56,7 @@ def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
             g = sns.lineplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=_y, 
                              alpha = alpha, ci=ci2, marker=marker, estimator=estimator)
         elif plot_options['color'] !=None:
-            g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=None,  ax=_ax,label=_y, 
+            g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,label=_y, 
                              alpha = alpha, markers=marker, estimator=estimator)
         else:
             g = sns.lineplot(data=df,x=x,y=_y, hue=hue, ax=_ax, label=_y,
