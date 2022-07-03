@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import matplotlib as mpl
 
-import  beautifulplots.beautifulplots as bp 
+import  beautifulplots.beautifulplots as bp  
 
 def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
     """Lineplot function designed for ease of use and aesthetics. Based on the

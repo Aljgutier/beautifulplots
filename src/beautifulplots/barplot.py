@@ -5,7 +5,7 @@ from matplotlib.colors import Normalize
 from matplotlib.cbook import boxplot_stats
 import matplotlib as mpl
 
-import  beautifulplots.beautifulplots as bp 
+import  beautifulplots.beautifulplots as bp  
 
 
 def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", bardataformat=None,

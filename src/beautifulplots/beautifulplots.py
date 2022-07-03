@@ -162,7 +162,7 @@ def plot_defaults():
 
     return plot_defaults
 
-def set_axisparams(options_dict,ax,g):
+def set_axisparams(options_dict,ax,g): 
     """Receives as input a dictionary of plot options and applies the options to the maxtplotlib axis and graph.
 
     Args:
