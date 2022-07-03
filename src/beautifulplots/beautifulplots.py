@@ -51,7 +51,7 @@ def plot_defaults():
             
         ylabel (String):  ylable title, default = ''
         
-    **Bar, Line, Scatter Plots**
+    **Line, Scatter Plots**
     
     Args:
         
