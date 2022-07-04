@@ -124,7 +124,7 @@ by Tomas Beuzen & Tiffany Timbers
   * create test file in tests/test_kale.py
   * pytest tests/  # run tests
   * poetry add --dev pytest-cov # test coverage
-  * pytest tests/ --cov=kale
+  * pytest tests/ --cov=beautifulplots
 
 
  * Section 3.8 **Building Documentation**
