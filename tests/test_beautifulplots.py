@@ -69,6 +69,13 @@ def test_barplot():
                    xlims = (0.1,100), legend=True, legendloc="lower right", test_mode=True)
     assert plot_return == None, "barplot error: did not complete normally"
     
+    
+    bp.barplot(df,'category','sales', palette='tab20', 
+                   title='1a. Beautifulplots barplot, Sales All Stores by Product Category, secondary y-axis', figsize=(12,4),
+                   bardatalabels=True, bardataformat=".2f", barcurrency=True, ylims = (0.1,220), 
+                   y2='units',ylims2=(0,45), color2='black',marker2="o", test_mode=True)
+    assert plot_return == None, "barplot error: did not complete normally"
+    
 def test_lineplot():
     
     # data
