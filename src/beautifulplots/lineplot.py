@@ -4,7 +4,9 @@ import matplotlib as mpl
 
 import  beautifulplots.beautifulplots as bp  
 
-def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
+def lineplot(df, x, y, yaxisformat="1.2f", ycurrency=None,
+             y2=None,y2axisformat="1.2f", y2currency=None, 
+             ax=None, test_mode=False, estimator=None, estimator2=None, **kwargs):
     """Lineplot function designed for ease of use and aesthetics. Based on the
     Seaborn lineplot function with improvements, such as secondary axis, ease of use, and 
     improved default parameters. Refer to beautiful plot_defauts for full list of options.
@@ -15,16 +17,21 @@ def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
         x: Dataframe column corresponding to the lineplot x-axis
             aldfsd;lfj
         
-        y: Dataframe column corresponding to the lineplot y-axis
+        y: Dolumn or list of columns corresponding to the lineplot y-axis
             
-        y2: Column name correspondng to the secondary axis, default = None 
+        y2: Column or list of columns correspondng to the secondary axis, default = None 
+        
+        estimator: Specifies how to summarize data corresponding to y-axis. Defaults to plot all data points do not summarize.
+        
+        estimator2: Specifies how to summarize data corresponding to y2-axis. Defaults to plot all data points do not summarize.
+
 
     Returns:
         returns None if processing completes succesfully (without errors).
     """ 
+    #***
+ 
     plot_options = bp.get_kwargs(**kwargs)
-    estimator = plot_options['estimator']
-    estimator2 = plot_options['estimator2']
     hue = plot_options['hue']
     color = plot_options['color']
     ci2 = plot_options['ci2']
@@ -88,24 +95,16 @@ def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
                 
         _ax2.grid(b=None)        
             
-    # yaxis currency
-    if plot_options["yaxis_currency"] == True:
-        if plot_options['ytick_format'] !=None:
-            f="${x:"+plot_options["ytick_format"]+"}"
-            _ax.yaxis.set_major_formatter(f)
-        else:
-            _ax.yaxis.set_major_formatter('${x:.2f}')
-           
-    # legend
-    if plot_options['legend_labels']!=None:
-        _ax.legend(labels=plot_options['legend_labels'])
-    
-    if plot_options['legend']==True:
-        _ax.legend( loc=plot_options['legend_loc'], prop={'size': plot_options['legendsize']})  
-    
-    # Set Axis Parameters
+    # yaxis format
+            
+      
+    # y axis Parameters primary axis
     bp.set_axisparams(plot_options,_ax,g)  # axis parameters
+    bp.set_yaxis_format(_ax,yaxisformat, ycurrency)
+    
+    # y2 axis parameters
     if y2 != None:
+
         bp.set_axisparams(plot_options,_ax2,g)  # axis 2 parameters
         
         # set ylims after set_axis ... set_axis lims defaults to primary y axis 
@@ -113,8 +112,11 @@ def lineplot(df, x, y, y2=None, ax=None, test_mode=False,  **kwargs):
             _ax2.set_ylim(plot_options['ylims2'])
         
         # axis 2 legend
-        if y2 != None and plot_options['legend']==True:
-            _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legendsize']})
+        handles, labels = _ax2.get_legend_handles_labels()
+        if y2 != None and handles:
+            _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legendfontsize']})
+
+        bp.set_yaxis_format(_ax2,y2axisformat, y2currency)
         
     # plot show if easy lineplot created the figure
     if ax==None and test_mode==False: plt.show() # if simpl_plot created the figure then plt.show()
