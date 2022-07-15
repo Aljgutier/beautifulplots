@@ -9,7 +9,8 @@ import  beautifulplots.beautifulplots as bp
 
 
 def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", bardataformat="1.2f",
-            y2=None, ax=None, bardatalabels=False, test_mode=False, bardatafontsize=14,
+            y2=None, y2axisformat="1.2f", y2currency=None, estimator=sum, estimator2=None,
+            ax=None, bardatalabels=False, test_mode=False, bardatafontsize=14,
             **kwargs):
     """Bar plot function designed for ease of use and aesthetics. 
     The underlying barplot is ased on the Seaborn with additions, such as secondary axis, data labels,
@@ -38,6 +39,10 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
             
         bardatalabels (Boolean): default = False (data labels not included)
         
+        estimater: default = sum. Specifies how to aggregate plot bar data.
+        
+        estimator2: default = None. Summarize y2 asis daa. Default is to not summarize y2 axis data.
+        
         additional options:  see kale.plot_defaults for additional input variables.
             
 
@@ -47,8 +52,6 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         
     plot_options = bp.get_kwargs(**kwargs)
     
-    estimator = plot_options['estimator'] 
-    estimator2 = plot_options['estimator'] 
     ci = plot_options['ci']
     ci2 = plot_options['ci2']
     alpha = plot_options['alpha']
@@ -80,34 +83,29 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
     # Bar labels ... iterate with hue
     # Matplotlib
       # https://matplotlib.org/stable/gallery/lines_bars_and_markers/bar_label_demo.html#sphx-glr-gallery-lines-bars-and-markers-bar-label-demo-py
-    # Geeks for Geeks
+      # Geeks for Geeks bar data labels
       # https://www.geeksforgeeks.org/how-to-show-values-on-seaborn-barplot/
-    if bardatalabels== True and hue == None:
-        f = "%"+bardataformat+""
-        if barcurrency == True: f = "$"+f # dollar
-        g.bar_label(g.containers[0],  fontsize=bardatafontsize, fmt=f)
-
-    # Geeks for Geeks bar data labels
-      # https://www.geeksforgeeks.org/how-to-show-values-on-seaborn-barplot/
-    if  bardatalabels == True and hue !=None:
-        f = "%"+bardataformat+""
-        if barcurrency == True: f = "$"+f # dollar
-        for i in g.containers:
-            g.bar_label(i,fontsize=bardatafontsize, fmt=f )
+    
+    if  bardatalabels == True:
+        f = bardataformat
+        for i in g.containers: 
+            if barcurrency!=None:
+                g.bar_label(i,fontsize=bardatafontsize,labels=[f'{barcurrency}{x:{f}}' for x in i.datavalues] )
+            else:
+                g.bar_label(i,fontsize=bardatafontsize,labels=[f'{x:{f}}' for x in i.datavalues] )
    
     # yaxis tick label format
     # https://matplotlib.org/stable/gallery/pyplots/dollar_ticks.html
     # x or y format same as bars ... since this could be v or h graph
-    if barcurrency == True:
         #y_ticks = _ax.get_yticks()
-        f='{x:'+ bardataformat  +'}'
-        if barcurrency== True: f='${x:'+ bardataformat  +'}'
-        if barorientation=='v':
-            _ax.yaxis.set_major_formatter(f)
-        if barorientation=='h':
-            _ax.xaxis.set_major_formatter(f)
+        
+    f='{x:'+ bardataformat  +'}'
+    if isinstance(barcurrency,str): f= barcurrency + f
+    if barorientation=='v':
+        _ax.yaxis.set_major_formatter(f)
+    if barorientation=='h':
+        _ax.xaxis.set_major_formatter(f)
  
-   
    # secondary y-axis
     if y2 != None:
        
@@ -144,8 +142,11 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
             _ax2.set_ylim(plot_options['ylims2'])
         
         # axis 2 legend
-        if y2 != None and plot_options['legend']==True:
+        handles, labels = _ax2.get_legend_handles_labels()
+        if y2 != None and handles==True:
             _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legendsize']})
+            
+        bp.set_yaxis_format(_ax2,y2axisformat, y2currency)
     
 
     if ax==None and test_mode==False: plt.show() # if barplot created the figure then plt.show()

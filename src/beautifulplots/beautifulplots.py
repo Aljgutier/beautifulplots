@@ -43,9 +43,7 @@ def plot_defaults():
         
         ytickrotation:  Rotation of the xtick label, default = 0
         
-        legendsize: legend font size, default = 16
-        
-        legend (Boolean):  Place a legend on the axis, default = False
+        legendfontsize: legend font size, default = 16
             
         xlabel (String): xlabel title, default = ''
             
@@ -133,8 +131,7 @@ def plot_defaults():
     'ytickfontsize':16,
     'ytickrotation':0,
     'titlefontsize':18,
-    'legendsize':16,
-    'legend':False,
+    'legendfontsize':16,
     'xlabel': '',
     'ylabel': '',
     'color':None,   # color designation for the corresponding graph
@@ -156,7 +153,6 @@ def plot_defaults():
     'alpha2': 0.5,
     'estimator':sum,
     'estimator2':sum
- 
 
     }
 
@@ -173,11 +169,11 @@ def set_axisparams(options_dict,ax,g):
     Returns:
         None: returns None if the function completes without errors.
     """ 
-
+    from beautifulplots import beautifulplots as bp 
     title=options_dict['title']
     titlefontsize=options_dict['titlefontsize']
     legendloc=options_dict['legend_loc']
-    legendsize=options_dict['legendsize']
+    legendfontsize=options_dict['legendfontsize']
     xlabel=options_dict['xlabel']
     xlabelfontsize=options_dict['xlabelfontsize']
     xlims=options_dict['xlims']
@@ -210,8 +206,10 @@ def set_axisparams(options_dict,ax,g):
     if xlims != None:
         ax.set_xlim(xlims[0],xlims[1])
 
-    if options_dict['legend'] == True:
-        ax.legend( loc=legendloc, prop={'size': legendsize})     
+    # if legend then set fontsize ... otherwise get warning
+    handles, labels = ax.get_legend_handles_labels()
+    if handles:
+        ax.legend( loc=legendloc, prop={'size': legendfontsize})     
         
 
     return None
@@ -237,3 +235,16 @@ def get_kwargs(**kwargs):
         if kwarg_value != default: plot_options[key] = kwarg_value # update plot_option 
         
     return plot_options
+
+
+def set_yaxis_format(ax,yaxisformat="1.2f", ycurrency=None, labelcolor='black', which='major'):
+    
+    # https://matplotlib.org/stable/gallery/pyplots/dollar_ticks.html
+    # Use automatic StrMethodFormatter
+    
+    f='{x:'+ yaxisformat  +'}'
+    if ycurrency !=None: f = ycurrency + f
+    ax.yaxis.set_major_formatter(f)
+    ax.yaxis.set_tick_params(which=which, labelcolor=labelcolor)
+    
+    return None
