@@ -54,6 +54,10 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     color2 = plot_options['color2']
     marker = plot_options['marker']
     marker2 = plot_options['marker2']
+    markers = plot_options['markers']
+    markers2 = plot_options['markers']
+    style = plot_options['style']
+    style2 = plot_options['style2']
     ycurrency = plot_options['ycurrency']
     y2currency = plot_options['y2currency']
     ylabel = plot_options['ylabel']
@@ -80,13 +84,16 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     for _y,_marker in zip(y,marker):
         if plot_options['palette'] !=None:
             g = sns.lineplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=_y, 
-                             alpha = alpha, ci=ci2, markers=_marker, estimator=estimator)
+                             alpha = alpha, ci=ci2, marker=_marker, estimator=estimator,
+                             markers=markers, style=style)
         elif plot_options['color'] !=None:
             g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,label=_y, 
-                             alpha = alpha, markers=_marker, estimator=estimator)
+                             alpha = alpha, marker=_marker, estimator=estimator,
+                             markers=markers, style=style)
         else:
             g = sns.lineplot(data=df,x=x,y=_y, hue=hue, ax=_ax, label=_y,
-                             alpha= alpha, markers=_marker, estimator=estimator  )
+                             alpha= alpha, marker=_marker, estimator=estimator,
+                             markers=None, style=style)
             
             
     # second y_axis ... plot this first so that primary y is plotted over secondary
@@ -104,15 +111,15 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
             if plot_options['palette2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, palette=palette2,  ci=ci2,
                                         ax=_ax2, label=_y2, alpha = alpha2, marker=_marker2,
-                                        estimator=estimator2)
+                                        estimator=estimator2, markers=markers2, style=style2)
             elif plot_options['color2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ci=ci2,
                                         ax=_ax2,label=_y2, alpha=alpha2, marker=_marker2,
-                                        estimator=estimator2)
+                                        estimator=estimator2, markers=markers2, style=style2)
             else:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, label=_y2, ci=ci2,
                                         alpha=alpha2, marker=_marker2,
-                                        estimator=estimator2) 
+                                        estimator=estimator2,markers=markers2, style=style2) 
                     
             _ax2.grid(b=None)        
             

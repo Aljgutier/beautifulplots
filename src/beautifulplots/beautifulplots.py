@@ -137,6 +137,10 @@ def plot_defaults():
     'y2label': None,
     'marker':None,
     'marker2':None,
+    'markers':None,
+    'markers2':None,
+    'style':None,
+    'style':None,
     'color':None,   # color designation for the corresponding graph
     'color2':None,   # color secondary y axis
     'palette':None,  
