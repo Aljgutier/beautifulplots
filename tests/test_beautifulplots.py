@@ -6,18 +6,18 @@ def test_plot_defaults():
     """Test plot defaults."""
 
     
-    plot_defaults_expected={'pltstyle': 'seaborn', 'figsize': None, 'legend_loc': 'best',
-                            'legend_loc2': 'best', 'wspace': 0.2, 'hspace': 0.2, 'sharex': False,
-                            'title': None, 'ylims': None, 'xlims': None, 'ylims2': None, 
-                            'xlabelfontsize': 16, 'xticklabelsize': 16, 'xtickfontsize': 16,
-                            'xtickrotation': 0, 'ylabelfontsize': 16, 'ytickfontsize': 16, 
-                            'ytickrotation': 0, 'titlefontsize': 18, 'legendfontsize': 16, 
-                            'xlabel': None, 'ylabel': None, 'y2label': None, 'marker': None, 
-                            'marker2': None, 'color': None, 'color2': None, 'palette': None, 
-                            'palette2': None, 'hue': None, 'ci': None, 'ci2': None,
-                            'ytick_format': None, 'legend_labels': None, 'alpha': None,
-                            'alpha2': 0.5, 'estimator': sum,
-                            'estimator2': sum, 'ycurrency': None, 'y2currency': None, 'yaxisformat': '1.2f', 'y2axisformat': '1.2f'}
+    plot_defaults_expected={'pltstyle': 'seaborn', 'figsize': None, 'legend_loc': 'best', 
+                            'legend_loc2': 'best', 'wspace': 0.2, 'hspace': 0.2, 
+                            'sharex': False, 'title': None, 'ylims': None, 'xlims': None,
+                            'ylims2': None, 'xlabelfontsize': 16, 'xticklabelsize': 16, 
+                            'xtickfontsize': 16, 'xtickrotation': 0, 'ylabelfontsize': 16, 
+                            'ytickfontsize': 16, 'ytickrotation': 0, 'titlefontsize': 18, 
+                            'legendfontsize': 16, 'xlabel': None, 'ylabel': None, 'y2label': None,
+                            'marker': None, 'marker2': None, 'color': None, 'color2': None, 
+                            'palette': None, 'palette2': None, 'hue': None, 'ci': None, 'ci2': None,
+                            'ytick_format': None, 'legend_labels': None, 'alpha': None, 'alpha2': 0.5,
+                            'estimator': sum, 'estimator2': sum, 'ycurrency': None, 'y2currency': None,
+                            'yaxisformat': '1.2f', 'y2axisformat': '1.2f'}
     
     plot_defaults_actual = bp.plot_defaults()
     assert plot_defaults_actual == plot_defaults_expected, "plot_defaults incorrect"
