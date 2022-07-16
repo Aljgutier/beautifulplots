@@ -175,6 +175,10 @@ by Tomas Beuzen & Tiffany Timbers
     > update the version in project.toml and commit
     > git tag v0.1.0
     > git push --tags
+    > git tag -l # list local tags
+    > git tag -d v2.0 # delete local tag
+    > git ls-remote --tags origin # list remote tags
+    > git push --delete origin v1.0 # delete remote tag
     ```
   * git online package your release and associate with the tag
 
@@ -198,7 +202,7 @@ by Tomas Beuzen & Tiffany Timbers
 
     * add testPyPi to Poetry repositories
     * poetry config repositories.test-pypi https://test.pypi.org/legacy/
-    * poetry publish -r test-pypi # you will need login and password
+    * **poetry publish -r test-pypi** # you will need login and password
     * Install to a local environment
       * login to testPyPi and navigate to your project (beautifulplots)
       * copy the install link at top e.g., pip install -i https:test.pypi.org/simple ...
