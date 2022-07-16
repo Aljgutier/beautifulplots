@@ -140,7 +140,7 @@ def plot_defaults():
     'markers':None,
     'markers2':None,
     'style':None,
-    'style':None,
+    'style2':None,
     'color':None,   # color designation for the corresponding graph
     'color2':None,   # color secondary y axis
     'palette':None,  
