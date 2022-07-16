@@ -9,7 +9,7 @@ import  beautifulplots.beautifulplots as bp
 
 
 def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", bardataformat="1.2f",
-            y2=None, y2axisformat="1.2f", y2currency=None, estimator=sum, estimator2=None,
+            y2=None,  estimator=sum, estimator2=sum,
             ax=None, bardatalabels=False, test_mode=False, bardatafontsize=14,
             **kwargs):
     """Bar plot function designed for ease of use and aesthetics. 
@@ -41,7 +41,7 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         
         estimater: default = sum. Specifies how to aggregate plot bar data.
         
-        estimator2: default = None. Summarize y2 asis daa. Default is to not summarize y2 axis data.
+        estimator2: default = None. Summarize y2 asis daa. Default is no aggregation, do not summarize y2 axis data.
         
         additional options:  see kale.plot_defaults for additional input variables.
             
@@ -62,6 +62,9 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
     marker2 = plot_options['marker2']
     color = plot_options['color']
     color2 = plot_options['color2']
+    y2label=plot_options['y2label']
+    y2axisformat = plot_options['y2axisformat']
+    y2currency = plot_options['y2currency']
 
 
     # if no hue then only one color
@@ -117,16 +120,16 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         _ax2 = _ax.twinx()
         
         
-        for _y2 in y2_list:
+        for _y2,_marker2 in zip(y2_list,marker2):
             if plot_options['palette2'] !=None:
                 g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ax=_ax2, label=_y2, 
-                                 alpha = alpha2,ci = ci2, marker=marker2, estimator=estimator2)
+                                 alpha = alpha2,ci = ci2, marker=_marker2, estimator=estimator2)
             elif plot_options['color2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ax=_ax2,label=_y2, 
-                                 alpha=alpha2, ci=ci2, marker=marker2, estimator=estimator2)
+                                 alpha=alpha2, ci=ci2, marker=_marker2, estimator=estimator2)
             else:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, label=_y2, 
-                                 alpha=alpha2, ci=ci2, marker=marker2, estimator=estimator2) 
+                                 alpha=alpha2, ci=ci2, marker=_marker2, estimator=estimator2) 
                 
         _ax2.grid(b=None)  
     
@@ -135,6 +138,7 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
     
     # y2 axis params
     if y2 != None:
+        plot_options["ylabel"]=y2label
         bp.set_axisparams(plot_options,_ax2,g)  # axis parameters
     
         # set ylims 2 after general axis parameters 

@@ -132,8 +132,11 @@ def plot_defaults():
     'ytickrotation':0,
     'titlefontsize':18,
     'legendfontsize':16,
-    'xlabel': '',
-    'ylabel': '',
+    'xlabel': None,
+    'ylabel': None,
+    'y2label': None,
+    'marker':None,
+    'marker2':None,
     'color':None,   # color designation for the corresponding graph
     'color2':None,   # color secondary y axis
     'palette':None,  
@@ -144,15 +147,16 @@ def plot_defaults():
 
 
     # Lines and Scatter
-    'marker':None,  # Boolean, list, dictionary
-    'marker2':None,  # Boolean, list, or dictionary
-    'yaxis_currency':False,
     'ytick_format': None,
     'legend_labels':None,
     'alpha': None,
     'alpha2': 0.5,
     'estimator':sum,
-    'estimator2':sum
+    'estimator2':sum,
+    'ycurrency':None,
+    'y2currency':None,
+    'yaxisformat':"1.2f",
+    'y2axisformat':"1.2f"
 
     }
 
