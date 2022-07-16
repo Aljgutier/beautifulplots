@@ -69,14 +69,18 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     else: _ax = ax
     
 
-    # Primary Y ... loop over each element
+    # make sure y and marker are iterable
     if not isinstance(y,list): y = [y]
-    if  not isinstance(marker,list): marker =[marker]
+    if marker == None:
+        if not isinstance(marker,list): marker = len(y)*[marker]
+    else:
+        if not isinstance(marker,list): marker =[marker]
+    
 
     for _y,_marker in zip(y,marker):
         if plot_options['palette'] !=None:
             g = sns.lineplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=_y, 
-                             alpha = alpha, ci=ci2, marker=_marker, estimator=estimator)
+                             alpha = alpha, ci=ci2, markers=_marker, estimator=estimator)
         elif plot_options['color'] !=None:
             g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,label=_y, 
                              alpha = alpha, markers=_marker, estimator=estimator)
@@ -87,26 +91,30 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
             
     # second y_axis ... plot this first so that primary y is plotted over secondary
     if y2 != None:
-        if not isinstance(y2,list): y2 = [y2]
-        if not isinstance(marker2,list): marker2 = [marker2]
-    
         _ax2 = _ax.twinx()
         
+        if not isinstance(y2,list): y = [y2]
+        if marker2 == None:
+            if not isinstance(marker2,list): marker2 = len(y2)*[marker2]
+        else:
+            if not isinstance(marker2,list): marker2 =[marker2]
+            
         for _y2,_marker2 in zip(y2,marker2):
+
             if plot_options['palette2'] !=None:
-                g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ci=ci2,
-                                 ax=_ax2, label=_y2, alpha = alpha2, markers=_marker2,
-                                 estimator=estimator2)
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, palette=palette2,  ci=ci2,
+                                        ax=_ax2, label=_y2, alpha = alpha2, marker=_marker2,
+                                        estimator=estimator2)
             elif plot_options['color2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ci=ci2,
-                                 ax=_ax2,label=_y2, alpha=alpha2, marker=_marker2,
-                                 estimator=estimator2)
+                                        ax=_ax2,label=_y2, alpha=alpha2, marker=_marker2,
+                                        estimator=estimator2)
             else:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, label=_y2, ci=ci2,
-                                 alpha=alpha2, marker=_marker2,
-                                 estimator=estimator2) 
-                
-        _ax2.grid(b=None)        
+                                        alpha=alpha2, marker=_marker2,
+                                        estimator=estimator2) 
+                    
+            _ax2.grid(b=None)        
             
     # yaxis format
     # y axis Parameters primary axis

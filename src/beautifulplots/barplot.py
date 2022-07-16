@@ -112,10 +112,12 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
    # secondary y-axis
     if y2 != None:
        
-        if isinstance(y2,list):
-            y2_list = y2
+        # make sure y2 and marker2 are iterable
+        if not isinstance(y2,list): y2 = [y2]
+        if marker2 == None:
+            if not isinstance(marker2,list): marker2 = len(y2)*[marker2]
         else:
-            y2_list = [y2]
+            if not isinstance(marker2,list): marker2 =[marker2]
 
         _ax2 = _ax.twinx()
         
