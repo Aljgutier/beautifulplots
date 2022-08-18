@@ -210,6 +210,7 @@ by Tomas Beuzen & Tiffany Timbers
       * install with pip (as copied above)
 
   * Section 3.10.2 **Publishing to PyPy**
+      * poetry publish
 
 * Section 3.11 **Summary Steps and Next Steps**
 
