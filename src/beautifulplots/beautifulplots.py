@@ -17,39 +17,31 @@ def plot_defaults():
  
         title (String): corresponds to the axis title. default = ''
             
-        titlefontsize: font size of the axis title, default = 18
-            
-        legend_loc(String): Matplotlib legend location, for example, upper right , default = "best".
-        
-        legend_loc2 (String): Secondary axis legend location, for example, upper right , default = best.
+        title_fontsize: font size of the axis title, default = 18
          
-        xlims: (xmin, xmax), minimum and maximum x-values of the axis. default = None, in which case the min and max are set automatically by matplotlib.
+        x_lims: (xmin, xmax), minimum and maximum x-values of the axis. default = None, in which case the min and max are set automatically by matplotlib.
         
-        ylims: (ymin,ymax), minimum and maximum y-values of the axis. default = None, in which case the min and max are set automatically by matplotlib.
+        y_lims: (ymin,ymax), minimum and maximum y-values of the axis. default = None, in which case the min and max are set automatically by matplotlib.
         
-        ylims2: (ymin,ymax), minimum and maximum y-values of the secondary axis. default = None, in which case the min and max are set automatically by matplotlib.
+        y2_lims: (ymin,ymax), minimum and maximum y-values of the secondary axis. default = None, in which case the min and max are set automatically by matplotlib.
         
-        xlabelfontsize: default = 16
+        x_label_fontsize: default = 16
         
-        xticklabelsize: default = 16
+        x_tick_labelsize: default = 16
         
-        xtickfontsize: default = 16
+        x_tick_fontsize: default = 16
         
-        xtickrotation: default = 0
+        x_tick_rotation: default = 0
         
-        ylabelfontsize: ylabel font size, default = 16
+        y_label_fontsize: ylabel font size, default = 16
             
-        ytickfontsize: xtick label font size, default = 16
+        y_tick_fontsize: xtick label font size, default = 16
         
-        ytickrotation:  Rotation of the xtick label, default = 0
+        y_tick_rotation:  Rotation of the xtick label, default = 0
         
-        legendfontsize: legend font size, default = 16
-            
-        xlabel (String): xlabel title, default = ''
-            
-        ylabel (String):  ylable title, default = ''
+
         
-    **Line, Scatter Plots**
+    **Plot attributes - Line, Bar, Scatter Plots**
     
     Args:
         
@@ -57,15 +49,21 @@ def plot_defaults():
             
         marker2: Secondary axis, Matplotlib line marker. default = None (Matplotlib default).
             
-        yaxis_currency (Boolean): Boolean default = False.
+        y_axis_currency (Boolean): Boolean default = False.
             
-        ytick_format (String): String default = None (Matplotlib default).
+        y_tick_format (String): String default = None (Matplotlib default).
             
         alpha (fraction): Trasnparancy (opacity), default = None (not transparent)
             
         alpha2 (fraction): Secondary axis, default = 0.5, 50% opacity
         
         legend_labels (list): Overide default legend labels. default = None (do not override)
+        
+        legend_loc(String): Matplotlib legend location, for example, upper right , default = "best".
+        
+        legend_loc2 (String): Secondary axis legend location, for example, upper right , default = best.
+        
+        legend_fontsize: legend font size, default = 16
         
         estimator: seaborn barplot summary estimator, default = sum
             
@@ -84,6 +82,22 @@ def plot_defaults():
         ci: Seaborn confidence interval parameter: float, sd, or None
             
         ci2: Seaborn confidence interval parameter second y axis: float, sd, or None
+            
+        x_label (String): xlabel title, default = ''
+            
+        y_label (String):  y lable title, default = ''
+        
+        h_line (int):  y-value, corresponding to horizontal line, default = None
+                
+        h_line_label (String):  y value, corresponding to horizontal line, default = None
+        
+        v_line (int):  x-value, corresponding to vertical line, default = None (no line)
+        
+        v_line_label (String):  x value, corresponding to vertical line, default = None (no line)
+
+        y_scale (String): scale for the y-axis (e.g., yscale = "log"), default = None (default is linear)
+        
+        x_scale (String): scale for the x-axis (e.g., xscale = "log"), default = None (default is linear)
      
     **Plots and subplots**
     
@@ -92,16 +106,21 @@ def plot_defaults():
     
     Args:
     
-        plotstyle (String): matplotlib plotstyle
+        plot_style (String): matplotlib plot style
             
-        figsize: total size (height, width) in inches of the figure, including total plotting area of all subplots and spacing
+        fig_size: total size (height, width) in inches of the figure, including total plotting area of all subplots and spacing
         
-        wspace: width space (horizontal) between subplots, default wspace = 0.2
+        w_space: width space (horizontal) between subplots, default wspace = 0.2
         
-        hspace: height space (vertical) between subplots, default hspace = 0.2
+        h_space: height space (vertical) between subplots, default hspace = 0.2
+        
+    **Annotations**
+    
+    Args:
+        annotate (List of Strings and positions): default = None.  List of Strings with corresponding (x,y) positions.
+        
+        annotate_fontsize (int): default = 16. Fontsize for each annotation.
             
-        legendloc: default=best
-   
     **Returns**
     
         Dictionary: {parameter1:value1, parameter2:value2, ... }. 
@@ -111,30 +130,32 @@ def plot_defaults():
     plot_defaults = {
     # plot and subplot
     'pltstyle': 'seaborn',
-    'figsize' :  None,
-    'legend_loc':'best',
-    'legend_loc2':'best',
-    'wspace': 0.2,
-    'hspace': 0.2,
-    'sharex':False,
+    'figsize' : None,
+    'w_space': 0.2,
+    'h_space': 0.2,
+    'share_x':False,
     
     # Axis ( corx and y plot)
     'title' :None,               #  list ot titles, 1 per axis  #  list of x,y tuples
-    'ylims' :None,               # list of two-tuples ylims (lower, upper)
-    'xlims' :None,
-    'ylims2':None,
-    'xlabelfontsize':16,
-    'xticklabelsize':16,
-    'xtickfontsize': 16,
-    'xtickrotation':0,
-    'ylabelfontsize':16,
-    'ytickfontsize':16,
-    'ytickrotation':0,
-    'titlefontsize':18,
-    'legendfontsize':16,
-    'xlabel': None,
-    'ylabel': None,
-    'y2label': None,
+    'y_lims' :None,               # list of two-tuples ylims (lower, upper)
+    'x_lims' :None,
+    'y_lims2':None,
+    'x_label_fontsize':16,
+    'x_tick_labelsize':16,
+    'x_tick_fontsize': 16,
+    'x_tick_rotation':0,
+    'y_label_fontsize':16,
+    'y_tick_fontsize':16,
+    'y_tick_rotation':0,
+    'title_fontsize':18,
+    'legend':True,
+    'legend_labels':None,
+    'legend_loc':'best',
+    'legend_loc2':'best',
+    'legend_fontsize':16,
+    'x_label': None,
+    'y_label': None,
+    'y2_label': None,
     'marker':None,
     'marker2':None,
     'markers':None,
@@ -150,17 +171,27 @@ def plot_defaults():
     'ci2': None, # confidence parameter for secondary axis
 
 
-    # Lines and Scatter
+    # Lines, bar, and Scatter plots
     'ytick_format': None,
-    'legend_labels':None,
     'alpha': None,
     'alpha2': 0.5,
-    'estimator':sum,
-    'estimator2':sum,
-    'ycurrency':None,
-    'y2currency':None,
-    'yaxisformat':"1.2f",
-    'y2axisformat':"1.2f"
+    'estimator':"sum",
+    'estimator2':"sum",
+    'y_currency':None,
+    'y2_currency':None,
+    'y_axis_format':"1.2f",
+    'y2_axis_format':"1.2f",
+    'h_line':None,
+    "v_line":None,
+    "h_line_label": None,
+    "v_line_label": None,
+    "y_scale":None,
+    "x_scale":None,
+    
+    
+    # annotations
+    "annotate":None,
+    "annotate_fontsize":16
 
     }
 
@@ -170,7 +201,7 @@ def set_axisparams(options_dict,ax,g):
     """Receives as input a dictionary of plot options and applies the options to the maxtplotlib axis and graph.
 
     Args:
-        options_dict (dictionary): Dictionary where each key, value pair corresponds to plot parameter
+        options_dict (dictionary): dictionar containint plot options. Each key, value pair corresponds to a plot parameter
         ax (axis): matplotlib axis to apply the plot options
         g (graph): matplotlib graph to apply the plot options
 
@@ -178,21 +209,30 @@ def set_axisparams(options_dict,ax,g):
         None: returns None if the function completes without errors.
     """ 
     from beautifulplots import beautifulplots as bp 
-    title=options_dict['title']
-    titlefontsize=options_dict['titlefontsize']
-    legendloc=options_dict['legend_loc']
-    legendfontsize=options_dict['legendfontsize']
-    xlabel=options_dict['xlabel']
-    xlabelfontsize=options_dict['xlabelfontsize']
-    xlims=options_dict['xlims']
-    xtickfontsize=options_dict['xtickfontsize']
-    xtickrotation=options_dict['xtickrotation']
-    ylabel=options_dict['ylabel']
-    ylabelfontsize=options_dict['ylabelfontsize']
-    ytickfontsize=options_dict['ytickfontsize']
-    ytickrotation=options_dict['ytickrotation']
-    ylims=options_dict['ylims']
     
+    annotate=options_dict['annotate']
+    annotate_fontsize=options_dict['annotate_fontsize']
+    title=options_dict['title']
+    title_fontsize=options_dict['title_fontsize']
+    legend=options_dict['legend']
+    legendloc=options_dict['legend_loc']
+    legendfontsize=options_dict['legend_fontsize']
+    xlabel=options_dict['x_label']
+    xlabelfontsize=options_dict['x_label_fontsize']
+    xlims=options_dict['x_lims']
+    xtickfontsize=options_dict['x_tick_fontsize']
+    xtickrotation=options_dict['x_tick_rotation']
+    ylabel=options_dict['y_label']
+    ylabelfontsize=options_dict['y_label_fontsize']
+    ytickfontsize=options_dict['y_tick_fontsize']
+    ytickrotation=options_dict['y_tick_rotation']
+    ylims=options_dict['y_lims']
+    hline=options_dict['h_line']
+    vline=options_dict['v_line']
+    hline_label=options_dict['h_line_label']
+    vline_label=options_dict['v_line_label']
+    yscale=options_dict['y_scale']
+    xscale=options_dict['x_scale']
     
     ax.set_xlabel(xlabel,fontsize=xlabelfontsize)
     ax.set_ylabel(ylabel,fontsize=ylabelfontsize)
@@ -206,7 +246,7 @@ def set_axisparams(options_dict,ax,g):
         y_tick.set_rotation(ytickrotation)
 
 
-    ax.set_title(title, fontsize=titlefontsize)
+    ax.set_title(title, fontsize=title_fontsize)
 
     if ylims != None:
         ax.set_ylim(ylims[0],ylims[1])
@@ -215,10 +255,32 @@ def set_axisparams(options_dict,ax,g):
         ax.set_xlim(xlims[0],xlims[1])
 
     # if legend then set fontsize ... otherwise get warning
+
+    
     handles, labels = ax.get_legend_handles_labels()
-    if handles:
-        ax.legend( loc=legendloc, prop={'size': legendfontsize})     
+    if handles: 
+        ax.legend().set_visible(legend)
+    if handles and legend == True: 
+        if legend == True: ax.legend( loc=legendloc, prop={'size': legendfontsize})     
         
+    # horizontal line(s)
+    if hline != None:
+        ax.axhline(y=hline, xmin=0.0, label=hline_label, xmax=1.0, color='k',lw=1)
+        
+    if vline != None:
+        ax.axvline(x=vline, ymin=0.0, ymax=1.0, label=vline_label, color='k',lw=1)
+        
+    if yscale == "log":
+        g.set(yscale="log")
+        
+    if xscale == "log":
+        g.set(xscale="log")
+        
+    if annotate != None:
+        for a in annotate: 
+            ax.annotate(a[0],xy=a[1], fontsize=annotate_fontsize)
+    
+    # vertical line(s)
 
     return None
 

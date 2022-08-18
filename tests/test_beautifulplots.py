@@ -6,18 +6,19 @@ def test_plot_defaults():
     """Test plot defaults."""
 
     
-    plot_defaults_expected={'pltstyle': 'seaborn', 'figsize': None, 'legend_loc': 'best', 
-                            'legend_loc2': 'best', 'wspace': 0.2, 'hspace': 0.2, 
-                            'sharex': False, 'title': None, 'ylims': None, 'xlims': None,
-                            'ylims2': None, 'xlabelfontsize': 16, 'xticklabelsize': 16, 
-                            'xtickfontsize': 16, 'xtickrotation': 0, 'ylabelfontsize': 16, 
-                            'ytickfontsize': 16, 'ytickrotation': 0, 'titlefontsize': 18, 
-                            'legendfontsize': 16, 'xlabel': None, 'ylabel': None, 'y2label': None,
-                            'marker': None, 'marker2': None, 'color': None, 'color2': None, 
-                            'palette': None, 'palette2': None, 'hue': None, 'ci': None, 'ci2': None,
-                            'ytick_format': None, 'legend_labels': None, 'alpha': None, 'alpha2': 0.5,
-                            'estimator': sum, 'estimator2': sum, 'ycurrency': None, 'y2currency': None,
-                            'yaxisformat': '1.2f', 'y2axisformat': '1.2f'}
+    plot_defaults_expected={'pltstyle': 'seaborn', 'figsize': None, 'w_space': 0.2, 'h_space': 0.2, 
+                            'share_x': False, 'title': None, 'y_lims': None, 'x_lims': None, 'y_lims2': None,
+                            'x_label_fontsize': 16, 'x_tick_labelsize': 16, 'x_tick_fontsize': 16,
+                            'x_tick_rotation': 0, 'y_label_fontsize': 16, 'y_tick_fontsize': 16, 
+                            'y_tick_rotation': 0, 'title_fontsize': 18, 'legend': True, 
+                            'legend_labels': None, 'legend_loc': 'best', 'legend_loc2': 'best', 'legend_fontsize': 16, 
+                            'x_label': None, 'y_label': None, 'y2_label': None, 'marker': None, 'marker2': None, 'markers': None,
+                            'markers2': None, 'style': None, 'style2': None, 'color': None, 'color2': None, 
+                            'palette': None, 'palette2': None, 'hue': None, 'ci': None, 'ci2': None, 'ytick_format': None, 
+                            'alpha': None, 'alpha2': 0.5, 'estimator': "sum", 'estimator2':"sum", 'y_currency': None, 
+                            'y2_currency': None, 'y_axis_format': '1.2f', 'y2_axis_format': '1.2f', 'h_line': None, 
+                            'v_line': None, 'h_line_label': None, 'v_line_label': None, 'y_scale': None,
+                            'x_scale': None, 'annotate': None, 'annotate_fontsize': 16}
     
     plot_defaults_actual = bp.plot_defaults()
     assert plot_defaults_actual == plot_defaults_expected, "plot_defaults incorrect"
@@ -108,4 +109,24 @@ def test_lineplot():
              figsize=[12,4],yaxis_currency=True, legend=True,
              ytick_format=".0f", title="S&P 500, easy lineplot", test_mode=True)
     
+    assert plot_return == None, "lineplot error: did not complete normally"
+    
+    
+def test_scatterplot():
+    
+    # data
+    file =  './data/olist_orders_demand_type_minnzp10_20220817.csv'
+    df = pd.read_csv(file,index_col=0)
+
+
+        
+    plot_return=bp.scatterplot(df, 'COV2', 'ADI' , h_line=1.32, v_line=0.49,  y_scale="log" , hue='type', figsize=(18,9),
+    legend=False,  annotate = [ ('ADI = 1.32', (1, 1.4) ), 
+                                       ('COV2 = 0.49' ,(0.525 ,10)),
+                                       ('Smooth',(0,1)),
+                                       ('Intermitent',(0,15)),
+                                       ('Lumpy',(1.25,15)),
+                                       ('Eratic',(1.25,1))],
+            annotate_fontsize = 20, title='Demand Types', title_fontsize = 32, test_mode=True)
+        
     assert plot_return == None, "lineplot error: did not complete normally"
