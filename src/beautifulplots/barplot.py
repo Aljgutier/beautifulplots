@@ -2,7 +2,6 @@
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.colors import Normalize
-from matplotlib.cbook import boxplot_stats
 import matplotlib as mpl
 
 import  beautifulplots.beautifulplots as bp  
@@ -43,8 +42,8 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         
         estimator2: default = None. Summarize y2 asis daa. Default is no aggregation, do not summarize y2 axis data.
         
-        additional options:  see kale.plot_defaults for additional input variables.
-            
+        additional options:  see beautifulplot.plot_defaults for additional input variables.
+        
 
     Returns:
         returns True if processing completes succesfully (without errors).
@@ -62,11 +61,12 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
     marker2 = plot_options['marker2']
     marker2 = plot_options['marker2']
     markers2 = plot_options['markers']
+    style2 = plot_options['style2']
     color = plot_options['color']
     color2 = plot_options['color2']
-    y2label=plot_options['y2label']
-    y2axisformat = plot_options['y2axisformat']
-    y2currency = plot_options['y2currency']
+    y2label=plot_options['y2_label']
+    y2axisformat = plot_options['y2_axis_format']
+    y2currency = plot_options['y2_currency']
 
 
     # if no hue then only one color
@@ -124,7 +124,7 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         _ax2 = _ax.twinx()
         
         
-        for _y2,_marker2 in zip(y2_list,marker2):
+        for _y2,_marker2 in zip(y2,marker2):
             if plot_options['palette2'] !=None:
                 g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ax=_ax2, label=_y2, 
                                  alpha = alpha2,ci = ci2, marker=_marker2, estimator=estimator2,
@@ -145,17 +145,17 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
     
     # y2 axis params
     if y2 != None:
-        plot_options["ylabel"]=y2label
+        plot_options["y_label"]=y2label
         bp.set_axisparams(plot_options,_ax2,g)  # axis parameters
     
         # set ylims 2 after general axis parameters 
-        if plot_options['ylims2'] != None:
-            _ax2.set_ylim(plot_options['ylims2'])
+        if plot_options['y_lims2'] != None:
+            _ax2.set_ylim(plot_options['y_lims2'])
         
         # axis 2 legend
         handles, labels = _ax2.get_legend_handles_labels()
         if y2 != None and handles==True:
-            _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legendsize']})
+            _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legend_size']})
             
         bp.set_yaxis_format(_ax2,y2axisformat, y2currency)
     

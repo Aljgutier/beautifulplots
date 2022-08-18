@@ -33,6 +33,8 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
         estimator: Specifies how to summarize data corresponding to y-axis. Defaults to plot all data points do not summarize.
         
         estimator2: Specifies how to summarize data corresponding to y2-axis. Defaults to plot all data points do not summarize.
+        
+        additional options:  see beautifulplot.plot_defaults for additional input variables.
 
     Returns:
         returns None if processing completes succesfully (without errors).
@@ -58,12 +60,12 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     markers2 = plot_options['markers']
     style = plot_options['style']
     style2 = plot_options['style2']
-    ycurrency = plot_options['ycurrency']
-    y2currency = plot_options['y2currency']
-    ylabel = plot_options['ylabel']
-    y2label = plot_options['y2label']
-    yaxisformat = plot_options['yaxisformat']
-    y2axisformat = plot_options['y2axisformat']
+    ycurrency = plot_options['y_currency']
+    y2currency = plot_options['y2_currency']
+    ylabel = plot_options['y_label']
+    y2label = plot_options['y2_label']
+    yaxisformat = plot_options['y_axis_format']
+    y2axisformat = plot_options['y2_axis_format']
     
     # get back to the default plot options
     if ax == None: 
@@ -72,9 +74,11 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
         fig,_ax = plt.subplots(nrows=1, ncols=1, figsize=plot_options['figsize']) 
     else: _ax = ax
     
+    
+    
 
     # make sure y and marker are iterable
-    if not isinstance(y,list): y = [y]
+    if isinstance(y,str): y = [y]
     if marker == None:
         if not isinstance(marker,list): marker = len(y)*[marker]
     else:
@@ -100,14 +104,17 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     if y2 != None:
         _ax2 = _ax.twinx()
         
-        if not isinstance(y2,list): y = [y2]
+        if isinstance(y2,str): 
+            y2 = [y2]
+        
+
+        
         if marker2 == None:
             if not isinstance(marker2,list): marker2 = len(y2)*[marker2]
         else:
             if not isinstance(marker2,list): marker2 =[marker2]
             
         for _y2,_marker2 in zip(y2,marker2):
-
             if plot_options['palette2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, palette=palette2,  ci=ci2,
                                         ax=_ax2, label=_y2, alpha = alpha2, marker=_marker2,
@@ -131,17 +138,17 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     
     # y2 axis parameters
     if y2 != None:
-        plot_options['ylabel']=y2label
+        plot_options['y_label']=y2label
         bp.set_axisparams(plot_options,_ax2,g)  # axis 2 parameters
         
         # set ylims after set_axis ... set_axis lims defaults to primary y axis 
-        if plot_options['ylims2'] != None:
-            _ax2.set_ylim(plot_options['ylims2'])
+        if plot_options['y_lims2'] != None:
+            _ax2.set_ylim(plot_options['y_lims2'])
         
         # axis 2 legend
         handles, labels = _ax2.get_legend_handles_labels()
         if y2 != None and handles:
-            _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legendfontsize']})
+            _ax2.legend( loc=plot_options['legend_loc2'], prop={'size': plot_options['legend_fontsize']})
 
         bp.set_yaxis_format(_ax2,y2axisformat, y2currency)
         

@@ -9,3 +9,4 @@ from .beautifulplots import get_kwargs
 from .beautifulplots import set_yaxis_format
 from .barplot import barplot
 from .lineplot import lineplot
+from .scatterplot import scatterplot
