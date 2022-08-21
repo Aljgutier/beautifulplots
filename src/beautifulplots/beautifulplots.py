@@ -48,6 +48,10 @@ def plot_defaults():
         marker: Matplotlib line markers. default = None (Matplotlib default).
             
         marker2: Secondary axis, Matplotlib line marker. default = None (Matplotlib default).
+        
+        marker: sns line markers. default = None (sns default).
+            
+        marker2: Secondary axis, sns line markers. default = None (sns default).
             
         y_axis_currency (Boolean): Boolean default = False.
             
@@ -128,18 +132,24 @@ def plot_defaults():
     """    
 
     plot_defaults = {
-    # plot and subplot
+        
+    # axis, plot and subplot
     'pltstyle': 'seaborn',
     'figsize' : None,
     'w_space': 0.2,
     'h_space': 0.2,
     'share_x':False,
-    
-    # Axis ( corx and y plot)
     'title' :None,               #  list ot titles, 1 per axis  #  list of x,y tuples
     'y_lims' :None,               # list of two-tuples ylims (lower, upper)
     'x_lims' :None,
     'y_lims2':None,
+    "yfb": None,
+    "yfb_color": "red",
+    "yfb_alpha": 0.5,
+    'y_currency':None,
+    'y2_currency':None,
+    'y_axis_format':"1.2f",
+    'y2_axis_format':"1.2f",
     'x_label_fontsize':16,
     'x_tick_labelsize':16,
     'x_tick_fontsize': 16,
@@ -153,13 +163,15 @@ def plot_defaults():
     'legend_loc':'best',
     'legend_loc2':'best',
     'legend_fontsize':16,
-    'x_label': None,
-    'y_label': None,
-    'y2_label': None,
+    'x_axis_label': None,
+    'y_axis_label': None,
+    'y2_axis_label': None,
     'marker':None,
     'marker2':None,
     'markers':None,
     'markers2':None,
+    "linestyle":"-",
+    "linestyle2":"-",
     'style':None,
     'style2':None,
     'color':None,   # color designation for the corresponding graph
@@ -177,10 +189,6 @@ def plot_defaults():
     'alpha2': 0.5,
     'estimator':"sum",
     'estimator2':"sum",
-    'y_currency':None,
-    'y2_currency':None,
-    'y_axis_format':"1.2f",
-    'y2_axis_format':"1.2f",
     'h_line':None,
     "v_line":None,
     "h_line_label": None,
@@ -217,12 +225,12 @@ def set_axisparams(options_dict,ax,g):
     legend=options_dict['legend']
     legendloc=options_dict['legend_loc']
     legendfontsize=options_dict['legend_fontsize']
-    xlabel=options_dict['x_label']
+    xlabel=options_dict['x_axis_label']
     xlabelfontsize=options_dict['x_label_fontsize']
     xlims=options_dict['x_lims']
     xtickfontsize=options_dict['x_tick_fontsize']
     xtickrotation=options_dict['x_tick_rotation']
-    ylabel=options_dict['y_label']
+    ylabel=options_dict['y_axis_label']
     ylabelfontsize=options_dict['y_label_fontsize']
     ytickfontsize=options_dict['y_tick_fontsize']
     ytickrotation=options_dict['y_tick_rotation']
@@ -311,6 +319,7 @@ def set_yaxis_format(ax,yaxisformat="1.2f", ycurrency=None, labelcolor='black', 
     
     # https://matplotlib.org/stable/gallery/pyplots/dollar_ticks.html
     # Use automatic StrMethodFormatter
+
     
     f='{x:'+ yaxisformat  +'}'
     if ycurrency !=None: f = ycurrency + f

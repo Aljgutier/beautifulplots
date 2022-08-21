@@ -56,16 +56,22 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     color2 = plot_options['color2']
     marker = plot_options['marker']
     marker2 = plot_options['marker2']
-    markers = plot_options['markers']
-    markers2 = plot_options['markers']
+    markers = plot_options['marker']
+    markers2 = plot_options['marker2']
+    linestyle = plot_options["linestyle"]
+    linestyle2 = plot_options["linestyle2"]
     style = plot_options['style']
     style2 = plot_options['style2']
     ycurrency = plot_options['y_currency']
     y2currency = plot_options['y2_currency']
-    ylabel = plot_options['y_label']
-    y2label = plot_options['y2_label']
+    ylabel = plot_options['y_axis_label']
+    y2label = plot_options['y2_axis_label']
     yaxisformat = plot_options['y_axis_format']
     y2axisformat = plot_options['y2_axis_format']
+    yfb = plot_options['yfb']
+    yfb_color = plot_options["yfb_color"]
+    yfb_alpha = plot_options["yfb_alpha"]
+    
     
     # get back to the default plot options
     if ax == None: 
@@ -73,8 +79,6 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
         plt.style.use(plot_options['pltstyle'])
         fig,_ax = plt.subplots(nrows=1, ncols=1, figsize=plot_options['figsize']) 
     else: _ax = ax
-    
-    
     
 
     # make sure y and marker are iterable
@@ -89,15 +93,25 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
         if plot_options['palette'] !=None:
             g = sns.lineplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=_y, 
                              alpha = alpha, ci=ci2, marker=_marker, estimator=estimator,
-                             markers=markers, style=style)
+                             markers=markers, style=style, linestyle=linestyle)
         elif plot_options['color'] !=None:
             g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,label=_y, 
                              alpha = alpha, marker=_marker, estimator=estimator,
-                             markers=markers, style=style)
+                             markers=markers, style=style, linestyle=linestyle)
         else:
             g = sns.lineplot(data=df,x=x,y=_y, hue=hue, ax=_ax, label=_y,
                              alpha= alpha, marker=_marker, estimator=estimator,
-                             markers=None, style=style)
+                             markers=None, style=style, linestyle=linestyle)
+    
+    
+    if yfb != None:
+        yfb1 = yfb[0]
+        yfb2 = yfb[1]
+        _ax.fill_between(df[x], df[yfb1], df[yfb2], color = yfb_color, alpha=yfb_alpha)
+    
+                 #df_ml_pred["unit_sales_pred"]+df_ml_pred["error_lower"] ,
+                 #df_ml_pred["unit_sales_pred"]+df_ml_pred["error_upper"] , 
+                 #color="red", alpha=0.5)
             
             
     # second y_axis ... plot this first so that primary y is plotted over secondary
@@ -118,17 +132,17 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
             if plot_options['palette2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, palette=palette2,  ci=ci2,
                                         ax=_ax2, label=_y2, alpha = alpha2, marker=_marker2,
-                                        estimator=estimator2, markers=markers2, style=style2)
+                                        estimator=estimator2, markers=markers2, style=style2, linestyle=linestyle2)
             elif plot_options['color2'] !=None:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ci=ci2,
                                         ax=_ax2,label=_y2, alpha=alpha2, marker=_marker2,
-                                        estimator=estimator2, markers=markers2, style=style2)
+                                        estimator=estimator2, markers=markers2, style=style2, linestyle=linestyle2)
             else:
                 g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, label=_y2, ci=ci2,
                                         alpha=alpha2, marker=_marker2,
-                                        estimator=estimator2,markers=markers2, style=style2) 
+                                        estimator=estimator2,markers=markers2, style=style2, linestyle=linestyle2) 
                     
-            _ax2.grid(b=None)        
+            _ax2.grid(visible=None)        
             
     # yaxis format
     # y axis Parameters primary axis
@@ -138,7 +152,7 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     
     # y2 axis parameters
     if y2 != None:
-        plot_options['y_label']=y2label
+        plot_options['y_axis_label']=y2label
         bp.set_axisparams(plot_options,_ax2,g)  # axis 2 parameters
         
         # set ylims after set_axis ... set_axis lims defaults to primary y axis 

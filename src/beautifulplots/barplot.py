@@ -64,7 +64,7 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
     style2 = plot_options['style2']
     color = plot_options['color']
     color2 = plot_options['color2']
-    y2label=plot_options['y2_label']
+    y2label=plot_options['y2_axis_label']
     y2axisformat = plot_options['y2_axis_format']
     y2currency = plot_options['y2_currency']
 
@@ -138,7 +138,7 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
                                  alpha=alpha2, ci=ci2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2) 
                 
-        _ax2.grid(b=None)  
+        _ax2.grid(visible=None)  
     
     # set axis params
     bp.set_axisparams(plot_options,_ax,g)  # axis parameters from the plot_options dictionary

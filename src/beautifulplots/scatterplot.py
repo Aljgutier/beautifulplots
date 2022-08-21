@@ -49,7 +49,7 @@ def scatterplot(df, x, y, ax=None, test_mode=False, **kwargs):
     markers = plot_options['markers']
     style = plot_options['style']
     ycurrency = plot_options['y_currency']
-    ylabel = plot_options['y_label']
+    ylabel = plot_options['y_axis_label']
     yaxisformat = plot_options['y_axis_format']
     
 
