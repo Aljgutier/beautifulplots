@@ -7,18 +7,21 @@ def test_plot_defaults():
 
     
     plot_defaults_expected={'pltstyle': 'seaborn', 'figsize': None, 'w_space': 0.2, 'h_space': 0.2, 
-                            'share_x': False, 'title': None, 'y_lims': None, 'x_lims': None, 'y_lims2': None,
-                            'x_label_fontsize': 16, 'x_tick_labelsize': 16, 'x_tick_fontsize': 16,
-                            'x_tick_rotation': 0, 'y_label_fontsize': 16, 'y_tick_fontsize': 16, 
-                            'y_tick_rotation': 0, 'title_fontsize': 18, 'legend': True, 
-                            'legend_labels': None, 'legend_loc': 'best', 'legend_loc2': 'best', 'legend_fontsize': 16, 
-                            'x_label': None, 'y_label': None, 'y2_label': None, 'marker': None, 'marker2': None, 'markers': None,
-                            'markers2': None, 'style': None, 'style2': None, 'color': None, 'color2': None, 
-                            'palette': None, 'palette2': None, 'hue': None, 'ci': None, 'ci2': None, 'ytick_format': None, 
-                            'alpha': None, 'alpha2': 0.5, 'estimator': "sum", 'estimator2':"sum", 'y_currency': None, 
-                            'y2_currency': None, 'y_axis_format': '1.2f', 'y2_axis_format': '1.2f', 'h_line': None, 
-                            'v_line': None, 'h_line_label': None, 'v_line_label': None, 'y_scale': None,
-                            'x_scale': None, 'annotate': None, 'annotate_fontsize': 16}
+                            'share_x': False, 'title': None, 'y_lims': None, 'x_lims': None, 
+                            'y_lims2': None, 'yfb': None, 'yfb_color': 'red', 'yfb_alpha': 0.5, 
+                            'y_currency': None, 'y2_currency': None, 'y_axis_format': '1.2f', 
+                            'y2_axis_format': '1.2f', 'x_label_fontsize': 16, 'x_tick_labelsize': 16,
+                            'x_tick_fontsize': 16, 'x_tick_rotation': 0, 'y_label_fontsize': 16, 
+                            'y_tick_fontsize': 16, 'y_tick_rotation': 0, 'title_fontsize': 18, 
+                            'legend': True, 'legend_labels': None, 'legend_loc': 'best', 
+                            'legend_loc2': 'best', 'legend_fontsize': 16, 'x_axis_label': None,
+                            'y_axis_label': None, 'y2_axis_label': None, 'marker': None, 'marker2': None, 
+                            'markers': None, 'markers2': None, 'linestyle': '-', 'linestyle2': '-', 
+                            'style': None, 'style2': None, 'color': None, 'color2': None, 'palette': None, 
+                            'palette2': None, 'hue': None, 'ci': None, 'ci2': None, 'ytick_format': None,
+                            'alpha': None, 'alpha2': 0.5, 'estimator': 'sum', 'estimator2': 'sum', 
+                            'h_line': None, 'v_line': None, 'h_line_label': None, 'v_line_label': None,
+                            'y_scale': None, 'x_scale': None, 'annotate': None, 'annotate_fontsize': 16}
     
     plot_defaults_actual = bp.plot_defaults()
     assert plot_defaults_actual == plot_defaults_expected, "plot_defaults incorrect"
