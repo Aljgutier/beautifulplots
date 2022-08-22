@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "beautifulplots"
-version = "0.2.2"
+version = "0.2.3"
 description = "Python plotting library for beautiful, easy, and sophisticated matplotlib based plots. Compatible with Pandas and Seaborn plots."
 authors = ["Alberto Gutierrez"]
 license = "MIT"
