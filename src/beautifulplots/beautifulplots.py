@@ -273,10 +273,8 @@ def set_axisparams(options_dict,ax,g):
         
     # horizontal line(s)
     if hline != None:
-        print(type(hline))
         if type(hline) is not list and type(hline) is not tuple: hline = [hline]
         for hl in hline:
-            print(hl)
             ax.axhline(y=hl, xmin=0.0, label=hline_label, xmax=1.0, color='k',lw=1)
         
     if vline != None:
