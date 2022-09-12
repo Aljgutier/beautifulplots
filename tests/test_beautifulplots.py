@@ -18,7 +18,7 @@ def test_plot_defaults():
                             'y_axis_label': None, 'y2_axis_label': None, 'marker': None, 'marker2': None, 
                             'markers': None, 'markers2': None, 'linestyle': '-', 'linestyle2': '-', 
                             'style': None, 'style2': None, 'color': None, 'color2': None, 'palette': None, 
-                            'palette2': None, 'hue': None, 'ci': None, 'ci2': None, 'ytick_format': None,
+                            'palette2': None, 'hue': None, 'errorbar': None, 'errorbar2': None, 'ytick_format': None,
                             'alpha': None, 'alpha2': 0.5, 'estimator': 'sum', 'estimator2': 'sum', 
                             'h_line': None, 'v_line': None, 'h_line_label': None, 'v_line_label': None,
                             'y_scale': None, 'x_scale': None, 'annotate': None, 'annotate_fontsize': 16}

@@ -5,129 +5,61 @@
 
 by Tomas Beuzen & Tiffany Timbers
 
-# Chapter 2, Setup
+Create Virtual Environment
+> conda create --name sforecast python=3.8 -y
+> conda activate sforecast
 
-  * Section 2.2.1 Python
+Install Poetry Packaging Software 
+> conda install -c conda-forge cookiecutter
 
-    * Python including version number installed in Conda Environment
-    * Pythonpath needs to be specified for the src and doc directories (example.ipynb) (learned by experience)
-
-  ```
-   pythonpath_setup.sh
-        export PYTHONPATH="$PYTHONPATH:./src/<packagename>:../src/<packagename>"
-
-   > cd package_name
-   > pythonpath_setup.sh
-  ```
-
-  * Section 2.2.2. Packaging Software
-    * poetry https://python-poetry.org/docs/
-    * cookiecutter
-
-    ```
-    The get-poetry.py script described here will be replaced in
-    Poetry 1.2 by install-poetry.py. From Poetry 1.1.7 onwards,
-    you can already use this script as described here.
-
-    curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python -
-
-    $ conda install -c conda-forge cookiecutter
-    ```
-  * Section 2.3 PyPy
-    * Register for PyPy account
-    * Register for testPyPy account
-
-  * Visual Studio
-
-  * Jupyter
+Create package Structure .. one directory in the ../workespaces directory
+> cookiecutter https://github.com/py-pkgs/py-pkgs-cookiecutter.git
 
 
-# Chapter 3, Creating a Package
+Git ... go to git and create repo ... Init, Readme ... all defaults!!!
+> echo "# sforecast" >> README.md
+> git add .
+> git commit -m "feat: check in initial package"
+> git branch -M main
+> git remote add origin https://github.com/Aljgutier/beautifulplots.git
+> git push origin main
 
- * Section 3.2.1 Package Structure Introduction
+Poetry Lock File
+> poetry install  # writes the lock file (package dependencies)
 
- * Section 3.3 Version Control
-    * Git Setup ... go to section 3.5
+Add Source Code
+> git add src/pycounts/beautifulplots.py
+> git commit -m "feat: kale source code"
 
-* Section 3.2.2 Creating Package Structure
-  * **go to section 3.5 **
+Add dependent packages with poetry
+> poetry add matplotlib
+> poetry add seaborn
+> poetry add pandas
+> poetry add sklearn
 
-* Secton 3.4 **Packagng Your Code**
-  * go to Section 3.5  cookie cutter
-   ```
-       ./src/package_name/packag_name.py
-   ```
-
-* Section 3.5  **Conda Virtual Environment, Package Install**
-  * see code below ... virtual env >> cookie cutter >> add code  >> package install
-    ```
-    # 1)  virtual environment
-    > conda create --name beautifulplots python=3.8 -y
-    > conda activate beautifulplots
-
-
-    # 2) package structure with cookiecutter
-    > conda install -c conda-forge cookiecutter
-        # one directory above ... creates packagename directory
-
-    # 3) Package Structure
-    > cookiecutter https://github.com/py-pkgs/py-pkgs-cookiecutter.git
-
-    # 4) Git Repo Online
-
-    # 5)  cd to workspace/package_directory
-    > git init ...
-
-    # 6) put code in ~/src/kale/kale.py
-
-    # 7 push to git
-        > git add .
-        > git commit -m "feat: check in initial package"
-        > git branch -M main
-        > git remote add origin https://github.com/Aljgutier/beautifulplots.git
-        > git push origin main
-
-
-    # 7)
-    $ poetry install  # writes the lock file (package dependencies)
-
-
-    # 8)
-    $ git add src/pycounts/kale.py
-    $ git commit -m "feat: kale source code"
-    $ git push
-    ```
-
-
-* Section 3.6 **Adding dependencies**
-  * pyproject.toml poetry.lock
-  * we recommend specifying version constraints without an upper cap by manually changing poetry’s default caret operator (^) to a greater-than-or-equal-to sign (>=)
-
+* we recommend specifying version constraints without an upper cap by manually changing poetry’s default caret operator (^) to a greater-than-or-equal-to sign (>=)  
+pyproject.toml  
    ```
   [tool.poetry.dependencies]
   python = ">=3.9"
   matplotlib = ">=3.4.3"
   ```
 
-  ```
-  $ poetry add matplotlib
-  $ poetry add seaborn
-  $ poetry add pandas
+Add Dev Packages with poetry ... Jupyter notebook
+> poetry add --dev jupyter
+> poetry add --dev beautifulplots
+> poetry add --dev xlrd
+``
 
-  $ git add pyproject.toml  
-  $ git commit -m "build: remove upper bound on dependency versions"
-  $ git push
-  ```
-
-* Section 3.7 testing
+Testing
   * poetry add --dev pytest
-  * create test file in tests/test_kale.py
+  * create test file in tests/test_sw_forecast.py
   * pytest tests/  # run tests
   * poetry add --dev pytest-cov # test coverage
   * pytest tests/ --cov=beautifulplots
 
 
- * Section 3.8 **Building Documentation**
+Documentation
 
   * Sphinx
   * myst ... Markedly Styled Text
@@ -141,35 +73,13 @@ by Tomas Beuzen & Tiffany Timbers
   > open index.html
  ```
 
-  * Jupyter notebook
-    * poetry add --dev jupyter
-
- ```
-   > poetry add --dev jupyter
-   > jupyter notebook
- ```
-
- ```
-
-  cd ..
-  > git add README.md docs/example.ipynb
-  > git commit -m "docs: updated readme and example"
-  > git add src/pycounts/pycounts.py src/pycounts/plotting.py
-  > git commit -m "docs: created docstrings for package functions"
-  > git add pyproject.toml poetry.lock
-  > git commit -m "build: added dev dependencies for docs"
-  >git push
- ```
-
- * Section 3.8.5 **Hosting Documentation Online**
-
+Read the Docs
     * https://readthedocs.org/
     * associate git account with your read the docs account
     * Create a new packag/project ... add the git repo from your linked account
     * Build latest
 
- * Section 3.9 **Tagging Package with Version**
-
+Tagging Package with Version
    * tag your local branch
     ```
     > update the version in project.toml and commit
@@ -184,7 +94,7 @@ by Tomas Beuzen & Tiffany Timbers
 
   ![Git package release](./git_release_package.png)
 
-* Section 3.10 **Building and Distributing Your Package**
+Building and Distributing Your Package**
 
   * > poetry build
     * sdist - software distribution
@@ -198,24 +108,23 @@ by Tomas Beuzen & Tiffany Timbers
     * tar xzf beautifulplots-0.1.1.tar.gz
     * pip install beautifulplots-0.1.1/
 
-  * Section 3.10.2 **Publishing to testPyPi**
 
+Publishing to testPyPi  
     * add testPyPi to Poetry repositories
-    * poetry config repositories.test-pypi https://test.pypi.org/legacy/
+    * poetry config repositories.test-pypi https://test.pypi.org/legacy/ 
     * **poetry publish -r test-pypi** # you will need login and password
-    * Install to a local environment
-      * login to testPyPi and navigate to your project (beautifulplots)
-      * copy the install link at top e.g., pip install -i https:test.pypi.org/simple ...
-      * On your comptuter activate a python virtual environment with Python 3.8 or higher
-      * install with pip (as copied above)
-
-  * Section 3.10.2 **Publishing to PyPy**
-      * **poetry publish**
-
-* Section 3.11 **Summary Steps and Next Steps**
 
 
-# Chapter 7 Releasing and Versioning
+Install to a local environment  
+    * login to testPyPi and navigate to your project (beautifulplots)
+    * copy the install link at top e.g., pip install -i https:test.pypi.org/simple ...
+    * On your comptuter activate a python virtual environment with Python 3.8 or higher
+    * install with pip (as copied above)
+
+Publishing to PyPy
+    * poetry publish
+
+# Releasing and Versioning (Chapter 7)
 
 * git commit -m types
   * \<type> refers to the kind of change made and is usually one of:

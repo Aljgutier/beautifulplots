@@ -83,9 +83,9 @@ def plot_defaults():
             
         hue: dimension value for corresponding Seaborn graphs, default = None.
         
-        ci: Seaborn confidence interval parameter: float, sd, or None
+        errorbar: Seaborn errorbar parameter: float, sd, or None
             
-        ci2: Seaborn confidence interval parameter second y axis: float, sd, or None
+        errorbar2: Seaborn errorbar parameter second y axis: float, sd, or None
             
         x_label (String): xlabel title, default = ''
             
@@ -179,8 +179,8 @@ def plot_defaults():
     'palette':None,  
     'palette2':None,  # palette secondary y axis
     'hue':None,   # dimensional value for corresponding Seaborn graphs
-    'ci':None, # confidence parameter for pimary axis
-    'ci2': None, # confidence parameter for secondary axis
+    'errorbar':None, # confidence parameter for pimary axis
+    'errorbar2': None, # confidence parameter for secondary axis
 
 
     # Lines, bar, and Scatter plots

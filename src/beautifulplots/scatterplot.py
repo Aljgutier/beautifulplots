@@ -40,7 +40,7 @@ def scatterplot(df, x, y, ax=None, test_mode=False, **kwargs):
     
     
     hue = plot_options['hue']
-    ci2 = plot_options['ci2']
+    errorbar = plot_options['errorbar']
     alpha = plot_options['alpha']
     hue = plot_options['hue']
     palette = plot_options['palette']
@@ -71,15 +71,15 @@ def scatterplot(df, x, y, ax=None, test_mode=False, **kwargs):
 
     for _y,_marker in zip(y,marker):
         if plot_options['palette'] !=None:
-            g = sns.scatterplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=_y, 
-                             alpha = alpha, ci=ci2, marker=_marker,
+            g = sns.scatterplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax,
+                             alpha = alpha, marker=_marker,
                              markers=markers, style=style)
         elif plot_options['color'] !=None:
-            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,label=_y, 
-                             alpha = alpha, marker=_marker, markers=markers, style=style)
+            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,
+                             alpha = alpha,  marker=_marker, markers=markers, style=style)
         else:
 
-            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, ax=_ax, label=_y,
+            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, ax=_ax,
                              alpha= alpha, marker=_marker,  markers=None, style=style)
             
     

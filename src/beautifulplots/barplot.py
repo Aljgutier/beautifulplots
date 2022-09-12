@@ -51,8 +51,8 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         
     plot_options = bp.get_kwargs(**kwargs)
     
-    ci = plot_options['ci']
-    ci2 = plot_options['ci2']
+    errorbar = plot_options['errorbar']
+    errorbar2 = plot_options['errorbar2']
     alpha = plot_options['alpha']
     alpha2 = plot_options['alpha2']
     hue = plot_options['hue']
@@ -82,8 +82,9 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         fig,_ax = plt.subplots(nrows=1, ncols=1, figsize=plot_options['figsize']) 
     else: _ax = ax
         
+        
     g=sns.barplot(x=x, y=y, hue=hue, color = color, palette=palette, data=df, ax = _ax,
-                  orient=barorientation, ci=ci, estimator=estimator, alpha=alpha)
+                  orient=barorientation, errorbar=errorbar, estimator=estimator, alpha=alpha)
     
     # Bar labels ... iterate with hue
     # Matplotlib
@@ -126,16 +127,16 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         
         for _y2,_marker2 in zip(y2,marker2):
             if plot_options['palette2'] !=None:
-                g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ax=_ax2, label=_y2, 
-                                 alpha = alpha2,ci = ci2, marker=_marker2, estimator=estimator2,
+                g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ax=_ax2, 
+                                 alpha = alpha2,errorbar = errorbar2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2)
             elif plot_options['color2'] !=None:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ax=_ax2,label=_y2, 
-                                 alpha=alpha2, ci=ci2, marker=_marker2, estimator=estimator2,
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ax=_ax2,
+                                 alpha=alpha2, errorbar=errorbar2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2)
             else:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, label=_y2, 
-                                 alpha=alpha2, ci=ci2, marker=_marker2, estimator=estimator2,
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, 
+                                 alpha=alpha2, errorbar=errorbar2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2) 
                 
         _ax2.grid(visible=None)  
