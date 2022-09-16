@@ -91,16 +91,17 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
     
 
     for _y,_marker in zip(y,marker):
+        label = _y if hue == None else None
         if plot_options['palette'] !=None:
-            g = sns.lineplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax,
+            g = sns.lineplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=label,
                              alpha = alpha, errorbar=errorbar, marker=_marker, estimator=estimator,
                              markers=markers, style=style, linestyle=linestyle)
         elif plot_options['color'] !=None:
-            g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,
+            g = sns.lineplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax, label=label,
                              alpha = alpha, errorbar=errorbar, marker=_marker, estimator=estimator,
                              markers=markers, style=style, linestyle=linestyle)
         else:
-            g = sns.lineplot(data=df,x=x,y=_y, hue=hue, ax=_ax, 
+            g = sns.lineplot(data=df,x=x,y=_y, hue=hue, ax=_ax, label=label,
                              alpha= alpha, errorbar=errorbar, marker=_marker, estimator=estimator,
                              markers=None, style=style, linestyle=linestyle)
     
@@ -130,16 +131,17 @@ def lineplot(df, x, y, y2=None,  ax=None, test_mode=False, estimator=None, estim
             if not isinstance(marker2,list): marker2 =[marker2]
             
         for _y2,_marker2 in zip(y2,marker2):
+            label = _y2 if hue == None else None
             if plot_options['palette2'] !=None:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, palette=palette2,  errorbar=errorbar2,
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, palette=palette2,  errorbar=errorbar2, label=label,
                                         ax=_ax2, alpha = alpha2, marker=_marker2,
                                         estimator=estimator2, markers=markers2, style=style2, linestyle=linestyle2)
             elif plot_options['color2'] !=None:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  errorbar=errorbar2,
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  errorbar=errorbar2, label=label,
                                         ax=_ax2, alpha=alpha2, marker=_marker2,
                                         estimator=estimator2, markers=markers2, style=style2, linestyle=linestyle2)
             else:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2,  ci=errorbar2,
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2,  errorbar=errorbar2, label=label,
                                         alpha=alpha2, marker=_marker2,
                                         estimator=estimator2,markers=markers2, style=style2, linestyle=linestyle2) 
                     

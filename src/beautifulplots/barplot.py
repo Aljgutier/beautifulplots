@@ -126,16 +126,17 @@ def barplot(df, bar_columns, bar_values, barcurrency=None, barorientation="v", b
         
         
         for _y2,_marker2 in zip(y2,marker2):
+            label = _y2 if hue == None else None
             if plot_options['palette2'] !=None:
-                g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ax=_ax2, 
+                g = sns.lineplot(data=df,x=x, y =_y2, hue=hue, palette=palette2,  ax=_ax2, label=label,
                                  alpha = alpha2,errorbar = errorbar2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2)
             elif plot_options['color2'] !=None:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ax=_ax2,
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, color=color2,  ax=_ax2, label=label,
                                  alpha=alpha2, errorbar=errorbar2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2)
             else:
-                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, 
+                g = sns.lineplot(data=df,x=x, y=_y2, hue=hue, ax=_ax2, label=label,
                                  alpha=alpha2, errorbar=errorbar2, marker=_marker2, estimator=estimator2,
                                  markers=markers2, style=style2) 
                 

@@ -51,8 +51,6 @@ def scatterplot(df, x, y, ax=None, test_mode=False, **kwargs):
     ycurrency = plot_options['y_currency']
     ylabel = plot_options['y_axis_label']
     yaxisformat = plot_options['y_axis_format']
-    
-
 
     # make sure y and marker are iterable
     if not isinstance(y,list): y = [y]
@@ -66,20 +64,19 @@ def scatterplot(df, x, y, ax=None, test_mode=False, **kwargs):
         plt.style.use(plot_options['pltstyle'])
         fig,_ax = plt.subplots(nrows=1, ncols=1, figsize=plot_options['figsize']) 
     else: _ax = ax
-    
-
 
     for _y,_marker in zip(y,marker):
+        label = _y if hue == None else None
         if plot_options['palette'] !=None:
-            g = sns.scatterplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax,
+            g = sns.scatterplot(data=df,x=x, y=_y, hue=hue, palette=palette,  ax=_ax, label=label,
                              alpha = alpha, marker=_marker,
                              markers=markers, style=style)
         elif plot_options['color'] !=None:
-            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax,
+            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, color=color,  ax=_ax, label=label,
                              alpha = alpha,  marker=_marker, markers=markers, style=style)
         else:
 
-            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, ax=_ax,
+            g = sns.scatterplot(data=df,x=x,y=_y, hue=hue, ax=_ax,label=label,
                              alpha= alpha, marker=_marker,  markers=None, style=style)
             
     
