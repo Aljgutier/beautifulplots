@@ -1,12 +1,15 @@
 import beautifulplots as bp
 import pandas as pd
 
+# testing matplotlib
+# https://stackoverflow.com/questions/67892272/how-can-i-test-if-matplotlib-has-produced-the-correct-plot
+
 
 def test_plot_defaults():
     """Test plot defaults."""
 
     
-    plot_defaults_expected={'pltstyle': 'seaborn', 'figsize': None, 'w_space': 0.2, 'h_space': 0.2, 
+    plot_defaults_expected={'pltstyle': 'ggplot', 'figsize': None, 'w_space': 0.2, 'h_space': 0.2, 
                             'share_x': False, 'title': None, 'y_lims': None, 'x_lims': None, 
                             'y_lims2': None, 'yfb': None, 'yfb_color': 'red', 'yfb_alpha': 0.5, 
                             'y_currency': None, 'y2_currency': None, 'y_axis_format': '1.2f', 
