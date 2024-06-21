@@ -134,7 +134,7 @@ def plot_defaults():
     plot_defaults = {
         
     # axis, plot and subplot
-    'pltstyle': 'seaborn',
+    'pltstyle': 'ggplot',
     'figsize' : None,
     'w_space': 0.2,
     'h_space': 0.2,

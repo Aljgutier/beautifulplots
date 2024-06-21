@@ -112,7 +112,7 @@ Building and Distributing Your Package**
 Publishing to testPyPi  
     * add testPyPi to Poetry repositories
     * poetry config repositories.test-pypi https://test.pypi.org/legacy/ 
-    * **poetry publish -r test-pypi** # you will need login and password
+    *  > poetry publish -r test-pypi  # you will need login and password
 
 
 Install to a local environment  
@@ -122,7 +122,7 @@ Install to a local environment
     * install with pip (as copied above)
 
 Publishing to PyPy
-    * poetry publish
+    * > poetry publish
 
 # Releasing and Versioning (Chapter 7)
 
